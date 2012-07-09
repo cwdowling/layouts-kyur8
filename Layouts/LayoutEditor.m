@@ -22,6 +22,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *next;
 @property (weak, nonatomic) IBOutlet AppView *pictureSpace;
 @property (weak, nonatomic) DividerWidthSlider *dividerSlider;
+
+@property(weak, nonatomic) NSMutableArray *imageArray;
+@property(weak, nonatomic) NSMutableArray *sliderArray;
 - (UIImage *) takePicture;
 - (IBAction)sliderChanged:(id)sender;
 
@@ -36,6 +39,8 @@
 @synthesize instruction;
 @synthesize pictureSpace;
 @synthesize dividerSlider;
+@synthesize imageArray;
+@synthesize sliderArray;
 
 const int FRAME_ORIGIN_X = 50;
 const int FRAME_ORIGIN_Y= 20;
@@ -110,6 +115,11 @@ const int IPHONE_SCREEN = 480*320*4;
     [slider addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
     return slider;
 }
+
+-(void)unpackLayout:(struct metadata_layout)metadata {
+
+}
+
 
 - (void)addLayout:(int)layoutNum {
     //TODO
@@ -1075,16 +1085,19 @@ const int IPHONE_SCREEN = 480*320*4;
         NSLog(@"final x %d",finalX);
         int finalY = view.frame.origin.y *CONVERSION_RATIO;
         NSLog(@"final y %d",finalY);
-        int finalWidth = view.frame.size.width * CONVERSION_RATIO;
+        int finalWidth = 480 - (int)((330.0 - view.frame.origin.x - view.frame.size.width - .5) * CONVERSION_RATIO) - (int)(view.frame.origin.x*CONVERSION_RATIO);
         NSLog(@"final width %d",finalWidth);
-        int finalHeight = view.frame.size.height * CONVERSION_RATIO;
+        int finalHeight = 320 - (int)((220.0 - view.frame.origin.y - view.frame.size.height - .5) * CONVERSION_RATIO) - (int)(view.frame.origin.y*CONVERSION_RATIO);
         NSLog(@"final height %d",finalHeight);
+        int pixelWidth = finalWidth;
+        
         int initialWidth = view.frame.size.width;
         NSLog(@"initial width %d",initialWidth);
         int initialHeight = view.frame.size.height;
         NSLog(@"initial height %d",initialHeight);
-         
-        int byte = ((finalY * 320) + finalX)*4;
+        int startY = finalY * 320;
+        int startByte = startY + finalX;
+        int byte = startByte*4;
         for(float y=0.0; y<finalHeight; ++y) {
             int yCoord = yVal + y*totalZoom;
             for(float x=0.0; x<finalWidth; ++x) {
@@ -1100,7 +1113,7 @@ const int IPHONE_SCREEN = 480*320*4;
                 rawData[byte+3] = (char)255;
                 byte += 4;
             }
-            byte += (320 - finalWidth)*4;
+            byte += (320 - pixelWidth)*4;
         }
 
     }
@@ -1116,6 +1129,35 @@ const int IPHONE_SCREEN = 480*320*4;
     free(rawData);
     
     return rawImage;
+    
+}
+
+-(struct metadata_layout)createMetadata {
+    struct metadata_layout metadata;
+    metadata.layoutNum = self.layoutNum;
+    
+    struct metadata_image images [[imageArray count]];
+    int i=0;
+    for(AppScrollView *image in imageArray) {
+        struct metadata_image data;
+        data.xOffset = image.contentOffset.x;
+        data.yOffset = image.contentOffset.y;
+        data.url = "";
+        data.zoomLevel = image.zoomScale;
+        images[i] = data;
+        ++i;
+    }
+    
+    struct metadata_slider sliders [[sliderArray count]];
+    int j=0;
+    for(UISlider *slider in sliderArray) {
+        struct metadata_slider data;
+        data.value = slider.value;
+        sliders [j] = data;
+        ++j;
+    }
+    
+    return metadata;
     
 }
 

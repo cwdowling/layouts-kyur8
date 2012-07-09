@@ -37,6 +37,7 @@
 		E9A9A3D51592668600C11DA8 /* Preview.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A9A3D41592668600C11DA8 /* Preview.m */; };
 		E9DBCEBB15AB276300C83178 /* cleartrack.png in Resources */ = {isa = PBXBuildFile; fileRef = E9DBCEB915AB276300C83178 /* cleartrack.png */; };
 		E9DBCEBC15AB276300C83178 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = E9DBCEBA15AB276300C83178 /* add.png */; };
+		E9DBCEBF15AB492600C83178 /* zineImageMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DBCEBE15AB492600C83178 /* zineImageMetadata.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,8 @@
 		E9A9A3D41592668600C11DA8 /* Preview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Preview.m; sourceTree = "<group>"; };
 		E9DBCEB915AB276300C83178 /* cleartrack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cleartrack.png; path = Layouts/cleartrack.png; sourceTree = "<group>"; };
 		E9DBCEBA15AB276300C83178 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add.png; path = Layouts/add.png; sourceTree = "<group>"; };
+		E9DBCEBD15AB492600C83178 /* zineImageMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zineImageMetadata.h; sourceTree = "<group>"; };
+		E9DBCEBE15AB492600C83178 /* zineImageMetadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zineImageMetadata.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +173,8 @@
 				E997C7C21598B31900E55F2B /* DividerWidthSlider.m */,
 				E9A9A3D31592668600C11DA8 /* Preview.h */,
 				E9A9A3D41592668600C11DA8 /* Preview.m */,
+				E9DBCEBD15AB492600C83178 /* zineImageMetadata.h */,
+				E9DBCEBE15AB492600C83178 /* zineImageMetadata.m */,
 				E9A9A3C71592242400C11DA8 /* LayoutEditor.h */,
 				E9A9A3C81592242400C11DA8 /* LayoutEditor.m */,
 				E994B428159A3C1100B5FDBE /* BlendSwitch.h */,
@@ -344,6 +349,7 @@
 				E945D51715939D5D00923FD4 /* AppSlider.m in Sources */,
 				E997C7C31598B31A00E55F2B /* DividerWidthSlider.m in Sources */,
 				E994B42A159A3C1200B5FDBE /* BlendSwitch.m in Sources */,
+				E9DBCEBF15AB492600C83178 /* zineImageMetadata.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

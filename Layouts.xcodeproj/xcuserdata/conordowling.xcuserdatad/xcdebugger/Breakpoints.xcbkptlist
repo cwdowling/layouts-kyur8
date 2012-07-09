@@ -23,27 +23,13 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Layouts/LayoutEditor.m"
-         timestampString = "363539019.03799"
+         timestampString = "363551244.89105"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1027"
-         endingLineNumber = "1027"
+         startingLineNumber = "1037"
+         endingLineNumber = "1037"
          landmarkName = "-prepareForSegue:sender:"
          landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "Layouts/LayoutEditor.h"
-         timestampString = "362428431.579324"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "14"
-         endingLineNumber = "14"
-         landmarkName = "layoutNum"
-         landmarkType = "19">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
