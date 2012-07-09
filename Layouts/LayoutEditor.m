@@ -7,6 +7,7 @@
 //
 
 #import "LayoutEditor.h"
+#import "LayoutViewController.h"
 #import "AppSlider.h"
 #import "AppView.h"
 #import "DividerWidthSlider.h"
@@ -1025,13 +1026,13 @@ const int IPHONE_SCREEN = 480*320*4;
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"preview"]) {
-        NSLog(@"preview");
-        Preview *preview = segue.destinationViewController;
-        UIImage *pass = [self takePicture];
-        NSLog(@"width %f",pass.size.width);
-        preview.picture = pass;
+        Preview *previewPage = segue.destinationViewController;
+        previewPage.picture = [self takePicture];
     } else if([segue.identifier isEqualToString:@"next"]) {
         NSLog(@"next");
+        LayoutViewController *nextPage = segue.destinationViewController;
+        [self.zine addObject:[self takePicture]];
+        nextPage.zine = self.zine;
     }
 }
 
@@ -1062,16 +1063,17 @@ const int IPHONE_SCREEN = 480*320*4;
 
         CGFloat zoom = view.zoomScale;
         NSLog(@"zoom level %f",zoom);
-        CGFloat totalZoom = zoom * CONVERSION_RATIO;
-        CGFloat xVal = view.contentOffset.x * zoom;
+        CGFloat totalZoom = 1.0 / zoom / CONVERSION_RATIO /CONVERSION_RATIO;
+        NSLog(@"totalZoom %f",totalZoom);
+        CGFloat xVal = view.contentOffset.x / CONVERSION_RATIO / zoom;
         NSLog(@" x offset %f",xVal);
         NSLog(@"content width %f",view.contentSize.width);
-        CGFloat yVal = view.contentOffset.y * zoom;
+        CGFloat yVal = view.contentOffset.y / CONVERSION_RATIO / zoom;
         NSLog(@" y offset %f",yVal);
         
-        float finalX = view.frame.origin.x * CONVERSION_RATIO;
+        int finalX = view.frame.origin.x *CONVERSION_RATIO;
         NSLog(@"final x %d",finalX);
-        float finalY = view.frame.origin.y * CONVERSION_RATIO;
+        int finalY = view.frame.origin.y *CONVERSION_RATIO;
         NSLog(@"final y %d",finalY);
         int finalWidth = view.frame.size.width * CONVERSION_RATIO;
         NSLog(@"final width %d",finalWidth);
@@ -1084,10 +1086,9 @@ const int IPHONE_SCREEN = 480*320*4;
          
         int byte = ((finalY * 320) + finalX)*4;
         for(float y=0.0; y<finalHeight; ++y) {
-            int yCoord = yVal + y*finalHeight / initialHeight;
+            int yCoord = yVal + y*totalZoom;
             for(float x=0.0; x<finalWidth; ++x) {
-                int xCoord = xVal + x*finalWidth/initialWidth;
-
+                int xCoord = xVal + x*totalZoom;
                 int copyByte = (yCoord * width * 4) + (xCoord * 4);
                 for(int z=0; z<3; ++z) {
                     if(view.blendTag) {

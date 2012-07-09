@@ -8,6 +8,7 @@
 
 #import "AppScrollView.h"
 
+
 @implementation AppScrollView
 
 @synthesize pic = _pic;
@@ -27,7 +28,8 @@
         [self.pic setImage:load];
         self.contentSize = self.pic.image.size;
         self.pic.frame = CGRectMake(0, 0, load.size.width , load.size.height);
-        [self.nextResponder touchesEnded: touches withEvent:event]; 
+        [self.nextResponder touchesEnded: touches withEvent:event];
+        self.zoomScale = 330.0/480.0;
     } else
         [super touchesEnded: touches withEvent: event];
 }
