@@ -8,11 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ImageMetadata : NSObject {
-    int xOffset;
-    int yOffset;
-    float zoomLevel;
-    NSString *url;
-}
+@interface ImageMetadata : NSObject
+
+@property (nonatomic) CGPoint offset;
+@property (nonatomic) float zoomLevel;
+@property (nonatomic, strong) NSString *url;
 
 @end

@@ -13,7 +13,7 @@
 
 @interface ZineMetadata : NSObject
 
-@property (nonatomic) NSNumber *layoutNum;
+@property (nonatomic) NSInteger *layoutNum;
 @property (nonatomic, strong) NSMutableArray *images;
 @property (nonatomic, strong) NSMutableArray *sliders;
 @property (nonatomic, strong) NSMutableArray *filters;

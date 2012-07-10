@@ -34,6 +34,7 @@
 - (UIImage *) takePicture;
 - (IBAction)sliderChanged:(id)sender;
 - (void)addLayout:(int)layoutNum;
+- (UIImage *) retrieveImageForURL:(NSString *)url;
 
 
 @end
@@ -103,7 +104,6 @@ const int IPHONE_SCREEN = 480*320*4;
     frame.pic = pic;
     [frame addSubview:pic];
     [frame setZoomScale:1.0/CONVERSION_RATIO];
-    frame.viewController = self;
     [self.imageArray addObject:frame];
 }
 
@@ -127,21 +127,6 @@ const int IPHONE_SCREEN = 480*320*4;
     return slider;
     [self.sliderArray addObject:slider];
 }
-
--(void)unpackLayout:(ZineMetadata *)metadata {
-    [self addLayout:[metadata.layoutNum intValue]; 
-     int x = 0;
-     for(SliderMetadata *slider in metadata.sliders) {
-         
-     }
-     int x = 0;
-     for(ImageMetadata *image in metadata.images) {
-         
-     }
-     
-    
-}
-
 
 - (void)addLayout:(int)layoutNum {
     //TODO
@@ -1094,29 +1079,18 @@ const int IPHONE_SCREEN = 480*320*4;
         CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
 
         CGFloat zoom = view.zoomScale;
-        NSLog(@"zoom level %f",zoom);
         CGFloat totalZoom = 1.0 / zoom / CONVERSION_RATIO /CONVERSION_RATIO;
-        NSLog(@"totalZoom %f",totalZoom);
         CGFloat xVal = view.contentOffset.x / CONVERSION_RATIO / zoom;
-        NSLog(@" x offset %f",xVal);
-        NSLog(@"content width %f",view.contentSize.width);
         CGFloat yVal = view.contentOffset.y / CONVERSION_RATIO / zoom;
-        NSLog(@" y offset %f",yVal);
         
         int finalX = view.frame.origin.x *CONVERSION_RATIO;
-        NSLog(@"final x %d",finalX);
         int finalY = view.frame.origin.y *CONVERSION_RATIO;
-        NSLog(@"final y %d",finalY);
         int finalWidth = 480 - (int)((330.0 - view.frame.origin.x - view.frame.size.width - .5) * CONVERSION_RATIO) - (int)(view.frame.origin.x*CONVERSION_RATIO);
-        NSLog(@"final width %d",finalWidth);
         int finalHeight = 320 - (int)((220.0 - view.frame.origin.y - view.frame.size.height - .5) * CONVERSION_RATIO) - (int)(view.frame.origin.y*CONVERSION_RATIO);
-        NSLog(@"final height %d",finalHeight);
         int pixelWidth = finalWidth;
         
         int initialWidth = view.frame.size.width;
-        NSLog(@"initial width %d",initialWidth);
         int initialHeight = view.frame.size.height;
-        NSLog(@"initial height %d",initialHeight);
         int startY = finalY * 320;
         int startByte = startY + finalX;
         int byte = (finalY *320 +finalX)*4;
@@ -1154,33 +1128,52 @@ const int IPHONE_SCREEN = 480*320*4;
     
 }
 
--(struct metadata_layout)createMetadata {
-    struct metadata_layout metadata;
+-(ZineMetadata *)createMetadata {
+    ZineMetadata *metadata = [[ZineMetadata alloc] init];
     metadata.layoutNum = self.layoutNum;
     
-    struct metadata_image images [[imageArray count]];
-    int i=0;
     for(AppScrollView *image in imageArray) {
-        struct metadata_image data;
-        data.xOffset = image.contentOffset.x;
-        data.yOffset = image.contentOffset.y;
-        data.url = "";
+        ImageMetadata *data = [[ImageMetadata alloc] init];
+        data.offset = image.contentOffset;
+        data.url = [[NSString  alloc] initWithString: @""];
         data.zoomLevel = image.zoomScale;
-        images[i] = data;
-        ++i;
+        [metadata.images addObject:data];
     }
     
-    struct metadata_slider sliders [[sliderArray count]];
-    int j=0;
     for(UISlider *slider in sliderArray) {
-        struct metadata_slider data;
+        SliderMetadata *data = [[SliderMetadata alloc] init];
+        data.frame = slider.frame;
         data.value = slider.value;
-        sliders [j] = data;
-        ++j;
+        [metadata.sliders addObject:data];
     }
     
     return metadata;
+}
+
+-(void)unpackLayout:(ZineMetadata *)metadata {
+    [self addLayout:metadata.layoutNum]; 
     
+    int x = 0;
+    for(SliderMetadata *slider in metadata.sliders) {
+        UISlider *matching = [self.sliderArray objectAtIndex:x];
+        matching.frame = slider.frame;
+        matching.value = slider.value;
+        ++x;
+    }
+    
+    int y = 0;
+    for(ImageMetadata *image in metadata.images) {
+        AppScrollView *matching = [self.imageArray objectAtIndex:y];
+        [matching.pic setImage:[self retrieveImageForURL:image.url]];
+        [matching setContentOffset:image.offset];
+        ++y;
+    }
+    
+    
+}
+
+-(UIImage *) retrieveImageForURL:(NSString *)url {
+    return [UIImage imageNamed:@"test"];
 }
 
 @end

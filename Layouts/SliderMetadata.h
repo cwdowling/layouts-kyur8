@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SliderMetadata : NSObject {
-    CGRect frame;
-    float value;
-}
+@interface SliderMetadata : NSObject 
+
+@property (nonatomic) CGRect frame;
+@property (nonatomic) float value;
 
 @end

@@ -10,5 +10,9 @@
 
 @implementation ZineMetadata
 
+@synthesize layoutNum;
+@synthesize sliders;
+@synthesize images;
+@synthesize filters;
 
 @end

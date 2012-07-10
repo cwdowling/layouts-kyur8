@@ -10,4 +10,7 @@
 
 @implementation SliderMetadata
 
+@synthesize frame;
+@synthesize value;
+
 @end

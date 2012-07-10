@@ -8,13 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "AppScrollView.h"
+
 @interface LayoutEditor : UIViewController <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic) NSInteger layoutNum;
 @property (nonatomic, strong) NSMutableArray *zine;
 @property (nonatomic, strong) NSMutableArray *metadataArray;
 -(void)unpackLayout:(struct metadata_layout)metadata;
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event from:(AppScrollView *)view;
 
-};
 @end

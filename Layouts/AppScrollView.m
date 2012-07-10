@@ -12,7 +12,6 @@
 
 @synthesize pic = _pic;
 @synthesize blendTag = _blendTag;
-@synthesize viewController = _viewController;
 
 - (id)initWithFrame:(CGRect)frame 
 {
@@ -24,7 +23,7 @@
 {	
     // If not dragging, send event to next responder
     if (!self.dragging) {
-        [self.viewController touchesEnded: touches withEvent:event from:self];
+        [self.superview touchesEnded: touches withEvent:event];
     } else
         [super touchesEnded: touches withEvent: event];
 }

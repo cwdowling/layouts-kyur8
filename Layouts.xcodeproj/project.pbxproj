@@ -35,6 +35,7 @@
 		E9A9A3C91592242400C11DA8 /* LayoutEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A9A3C81592242400C11DA8 /* LayoutEditor.m */; };
 		E9A9A3CB1592253A00C11DA8 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = E9A9A3CA1592253A00C11DA8 /* test.png */; };
 		E9A9A3D51592668600C11DA8 /* Preview.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A9A3D41592668600C11DA8 /* Preview.m */; };
+		E9C339ED15AC81E2001444D9 /* Filters.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C339EC15AC81E2001444D9 /* Filters.m */; };
 		E9DBCEBB15AB276300C83178 /* cleartrack.png in Resources */ = {isa = PBXBuildFile; fileRef = E9DBCEB915AB276300C83178 /* cleartrack.png */; };
 		E9DBCEBC15AB276300C83178 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = E9DBCEBA15AB276300C83178 /* add.png */; };
 		E9DBCEC215AB7F9E00C83178 /* ZineMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = E9DBCEC115AB7F9D00C83178 /* ZineMetadata.m */; };
@@ -96,6 +97,8 @@
 		E9A9A3CA1592253A00C11DA8 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = test.png; path = ../../Desktop/test.png; sourceTree = "<group>"; };
 		E9A9A3D31592668600C11DA8 /* Preview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preview.h; sourceTree = "<group>"; };
 		E9A9A3D41592668600C11DA8 /* Preview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Preview.m; sourceTree = "<group>"; };
+		E9C339EB15AC81E1001444D9 /* Filters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filters.h; sourceTree = "<group>"; };
+		E9C339EC15AC81E2001444D9 /* Filters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Filters.m; sourceTree = "<group>"; };
 		E9DBCEB915AB276300C83178 /* cleartrack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cleartrack.png; path = Layouts/cleartrack.png; sourceTree = "<group>"; };
 		E9DBCEBA15AB276300C83178 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add.png; path = Layouts/add.png; sourceTree = "<group>"; };
 		E9DBCEC015AB7F9D00C83178 /* ZineMetadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZineMetadata.h; sourceTree = "<group>"; };
@@ -180,6 +183,8 @@
 				E9A9A3CA1592253A00C11DA8 /* test.png */,
 				E997C7C11598B31900E55F2B /* DividerWidthSlider.h */,
 				E997C7C21598B31900E55F2B /* DividerWidthSlider.m */,
+				E9C339EB15AC81E1001444D9 /* Filters.h */,
+				E9C339EC15AC81E2001444D9 /* Filters.m */,
 				E9A9A3D31592668600C11DA8 /* Preview.h */,
 				E9A9A3D41592668600C11DA8 /* Preview.m */,
 				E9A9A3C71592242400C11DA8 /* LayoutEditor.h */,
@@ -376,6 +381,7 @@
 				E9DBCEC915AB83D000C83178 /* SliderMetadata.m in Sources */,
 				E9DBCECC15AB83E400C83178 /* ImageMetadata.m in Sources */,
 				E9DBCECF15AB83F700C83178 /* FilterMetadata.m in Sources */,
+				E9C339ED15AC81E2001444D9 /* Filters.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

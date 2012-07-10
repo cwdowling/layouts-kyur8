@@ -10,4 +10,8 @@
 
 @implementation ImageMetadata
 
+@synthesize offset;
+@synthesize zoomLevel;
+@synthesize url;
+
 @end
