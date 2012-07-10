@@ -1,0 +1,13 @@
+Integration of Layouts with KYUR8:
+
+Create segue from touches ended in LayoutEditor.m to a screen to select a photo and then send it back to layoutEditor and set loadedImage in the method equal to that UIImage.
+
+Add desired backgrounds and overlay desired pictures on sliders, slider pointers, buttons, and change the navigation controller as well as the default picture loaded into each view.
+
+Filters and a user interface for filters in preview.m (obviously not immediate)
+
+Link a publish button on the preview.m page to the rest of the app and send the zine with it.  The zine is currently a mutable array of UIImages names “zine”
+
+Link the app to the LayoutViewController to begin zine creation. 
+
+Copy over the storyboard elements and recreate the links and segues if necessary.
