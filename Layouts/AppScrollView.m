@@ -8,11 +8,11 @@
 
 #import "AppScrollView.h"
 
-
 @implementation AppScrollView
 
 @synthesize pic = _pic;
 @synthesize blendTag = _blendTag;
+@synthesize viewController = _viewController;
 
 - (id)initWithFrame:(CGRect)frame 
 {
@@ -24,12 +24,7 @@
 {	
     // If not dragging, send event to next responder
     if (!self.dragging) {
-        UIImage *load = [UIImage imageNamed:@"test"];
-        [self.pic setImage:load];
-        self.contentSize = self.pic.image.size;
-        self.pic.frame = CGRectMake(0, 0, load.size.width , load.size.height);
-        [self.nextResponder touchesEnded: touches withEvent:event];
-        self.zoomScale = 330.0/480.0;
+        [self.viewController touchesEnded: touches withEvent:event from:self];
     } else
         [super touchesEnded: touches withEvent: event];
 }

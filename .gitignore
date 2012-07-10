@@ -1,0 +1,7 @@
+.DS_Store
+*~
+/KYUR8.xcodeproj/xcuserdata
+/KYUR8.xcodeproj/project.xcworkspace/xcuserdata
+*.xcworspace
+/KYUR8.xcodeproj/project.xcworkspace/
+/nimbus

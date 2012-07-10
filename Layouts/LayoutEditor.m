@@ -7,6 +7,12 @@
 //
 
 #import "LayoutEditor.h"
+//metadata classes
+#import "ZineMetadata.h"
+#import "SliderMetadata.h"
+#import "ImageMetadata.h"
+#import "FilterMetadata.h"
+
 #import "LayoutViewController.h"
 #import "AppSlider.h"
 #import "AppView.h"
@@ -27,6 +33,7 @@
 @property(weak, nonatomic) NSMutableArray *sliderArray;
 - (UIImage *) takePicture;
 - (IBAction)sliderChanged:(id)sender;
+- (void)addLayout:(int)layoutNum;
 
 
 @end
@@ -41,6 +48,7 @@
 @synthesize dividerSlider;
 @synthesize imageArray;
 @synthesize sliderArray;
+@synthesize metadataArray;
 
 const int FRAME_ORIGIN_X = 50;
 const int FRAME_ORIGIN_Y= 20;
@@ -95,6 +103,8 @@ const int IPHONE_SCREEN = 480*320*4;
     frame.pic = pic;
     [frame addSubview:pic];
     [frame setZoomScale:1.0/CONVERSION_RATIO];
+    frame.viewController = self;
+    [self.imageArray addObject:frame];
 }
 
 -(void)configureSlider:(AppSlider *)slider {
@@ -103,6 +113,7 @@ const int IPHONE_SCREEN = 480*320*4;
     slider.maximumValue = (slider.frame.size.width-20)/2;
     slider.value = 0;
     [slider addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.sliderArray addObject:slider];
 }
 
 -(DividerWidthSlider *) configureDividerSlider:(CGRect) rect {
@@ -114,10 +125,21 @@ const int IPHONE_SCREEN = 480*320*4;
     slider.value = 0;
     [slider addTarget:self action:@selector(sliderChanged:) forControlEvents:UIControlEventValueChanged];
     return slider;
+    [self.sliderArray addObject:slider];
 }
 
--(void)unpackLayout:(struct metadata_layout)metadata {
-
+-(void)unpackLayout:(ZineMetadata *)metadata {
+    [self addLayout:[metadata.layoutNum intValue]; 
+     int x = 0;
+     for(SliderMetadata *slider in metadata.sliders) {
+         
+     }
+     int x = 0;
+     for(ImageMetadata *image in metadata.images) {
+         
+     }
+     
+    
 }
 
 
@@ -1023,14 +1045,18 @@ const int IPHONE_SCREEN = 480*320*4;
     return scrollView.pic;
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event from:(AppScrollView *)view {
     NSLog(@"tap gesture recognized");
+    UIImage *loadedImage = [UIImage imageNamed:@"test"];
+    [view.pic setImage:loadedImage];
+    view.contentSize = view.pic.image.size;
+    view.pic.frame = CGRectMake(0, 0, loadedImage.size.width , loadedImage.size.height);
     preview.enabled = YES;
     next.enabled = YES;
+
 }
 
 - (IBAction)sliderChanged:(id)sender {
-    NSLog(@"valuechanged");
     [sender valueChanged];
 }
 
@@ -1039,7 +1065,6 @@ const int IPHONE_SCREEN = 480*320*4;
         Preview *previewPage = segue.destinationViewController;
         previewPage.picture = [self takePicture];
     } else if([segue.identifier isEqualToString:@"next"]) {
-        NSLog(@"next");
         LayoutViewController *nextPage = segue.destinationViewController;
         [self.zine addObject:[self takePicture]];
         nextPage.zine = self.zine;
@@ -1051,13 +1076,10 @@ const int IPHONE_SCREEN = 480*320*4;
     unsigned char *rawData = malloc(IPHONE_SCREEN);
 
     NSArray *scrollviews = pictureSpace.subviews;
-    NSLog(@"%d",[scrollviews count]);
     for(AppScrollView *view in scrollviews) {
-        NSLog(@"trying to process a picture");
         UIImage *picture = view.pic.image ;
         CGImageRef imageRef = [picture CGImage];
         NSUInteger width = CGImageGetWidth(imageRef);
-        NSLog(@"subpicture width %d",width);
         NSUInteger height = CGImageGetHeight(imageRef);
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
         unsigned char *picData = malloc(height * width * 4);
@@ -1097,7 +1119,7 @@ const int IPHONE_SCREEN = 480*320*4;
         NSLog(@"initial height %d",initialHeight);
         int startY = finalY * 320;
         int startByte = startY + finalX;
-        int byte = startByte*4;
+        int byte = (finalY *320 +finalX)*4;
         for(float y=0.0; y<finalHeight; ++y) {
             int yCoord = yVal + y*totalZoom;
             for(float x=0.0; x<finalWidth; ++x) {

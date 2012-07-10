@@ -8,31 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "AppScrollView.h"
-
 @interface LayoutEditor : UIViewController <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic) NSInteger layoutNum;
 @property (nonatomic, strong) NSMutableArray *zine;
-@property (nonatomic, strong) NSMutableArray *metadata;
+@property (nonatomic, strong) NSMutableArray *metadataArray;
 -(void)unpackLayout:(struct metadata_layout)metadata;
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event from:(AppScrollView *)view;
 
-
-
-struct metadata_layout {
-    int layoutNum;
-    char sliders;
-    char images;
-    int filters;
-};
-
-struct metadata_slider {
-    float value;
-};
-struct metadata_image {
-    char *url;
-    int xOffset;
-    int yOffset;
-    float zoomLevel;
-    
 };
 @end

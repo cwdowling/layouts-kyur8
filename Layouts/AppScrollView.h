@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LayoutEditor.h"
 
 @interface AppScrollView : UIScrollView
 
 @property (weak, nonatomic) UIImageView *pic;
+@property (weak, nonatomic) LayoutEditor *viewController;
 @property (nonatomic) BOOL blendTag;
 
 @end
