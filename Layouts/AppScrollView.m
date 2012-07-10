@@ -23,10 +23,13 @@
 {	
     // If not dragging, send event to next responder
     if (!self.dragging) {
-        [self.superview touchesEnded: touches withEvent:event];
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        [dict setObject:self forKey:@"view"];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"handleTouchesEndedNotification" object:dict userInfo:nil];
+        //[self.superview touchesEnded: touches withEvent:event];
     } else
         [super touchesEnded: touches withEvent: event];
 }
-
 
 @end

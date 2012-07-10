@@ -15,7 +15,6 @@
 
 #import "LayoutViewController.h"
 #import "AppSlider.h"
-#import "AppView.h"
 #import "DividerWidthSlider.h"
 #import "Preview.h"
 #import "BlendSwitch.h"
@@ -26,7 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *instruction;
 @property (weak, nonatomic) IBOutlet UIButton *preview;
 @property (weak, nonatomic) IBOutlet UIButton *next;
-@property (weak, nonatomic) IBOutlet AppView *pictureSpace;
+@property (weak, nonatomic) IBOutlet UIView *pictureSpace;
 @property (weak, nonatomic) DividerWidthSlider *dividerSlider;
 
 @property(weak, nonatomic) NSMutableArray *imageArray;
@@ -104,6 +103,7 @@ const int IPHONE_SCREEN = 480*320*4;
     frame.pic = pic;
     [frame addSubview:pic];
     [frame setZoomScale:1.0/CONVERSION_RATIO];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addImage:) name:@"handleTouchesEndedNotification" object:nil];
     [self.imageArray addObject:frame];
 }
 
@@ -374,10 +374,10 @@ const int IPHONE_SCREEN = 480*320*4;
             AppScrollView *image1 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, 0, FRAME_WIDTH, FRAME_HEIGHT/3)];
             [self configureImage:image1];
             //middle third
-            AppScrollView *image2 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, FRAME_HEIGHT/3, FRAME_WIDTH, FRAME_HEIGHT/3)];
+            AppScrollView *image2 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, FRAME_HEIGHT/3, FRAME_WIDTH, (2*FRAME_HEIGHT)/3 -FRAME_HEIGHT/3)];
             [self configureImage:image2];
             //bottom third
-            AppScrollView *image3 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, (2*FRAME_HEIGHT)/3, FRAME_WIDTH, FRAME_HEIGHT/3)];
+            AppScrollView *image3 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, (2*FRAME_HEIGHT)/3, FRAME_WIDTH, FRAME_HEIGHT - (2*FRAME_HEIGHT)/3)];
             [self configureImage:image3];
             
             //right gap sliders
@@ -417,10 +417,10 @@ const int IPHONE_SCREEN = 480*320*4;
             AppScrollView *image1 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, 0, FRAME_WIDTH/3, FRAME_HEIGHT)];
             [self configureImage:image1];
             //middle
-            AppScrollView *image2 = [[AppScrollView alloc] initWithFrame:CGRectMake(FRAME_WIDTH/3, 0, FRAME_WIDTH/3, FRAME_HEIGHT)];
+            AppScrollView *image2 = [[AppScrollView alloc] initWithFrame:CGRectMake(FRAME_WIDTH/3, 0, (2*FRAME_WIDTH)/3 - FRAME_WIDTH/3, FRAME_HEIGHT)];
             [self configureImage:image2];
             //right
-            AppScrollView *image3 = [[AppScrollView alloc] initWithFrame:CGRectMake((2*FRAME_WIDTH)/3, 0, FRAME_WIDTH/3, FRAME_HEIGHT)];
+            AppScrollView *image3 = [[AppScrollView alloc] initWithFrame:CGRectMake((2*FRAME_WIDTH)/3, 0, FRAME_WIDTH - (2*FRAME_WIDTH)/3, FRAME_HEIGHT)];
             [self configureImage:image3];
                     
             //top gap sliders
@@ -633,10 +633,10 @@ const int IPHONE_SCREEN = 480*320*4;
             AppScrollView *image1 = [[AppScrollView alloc] initWithFrame:CGRectMake(FRAME_WIDTH/2, 0, FRAME_WIDTH/2, FRAME_HEIGHT/3)];
             [self configureImage:image1];
             //right middle third
-            AppScrollView *image2 = [[AppScrollView alloc] initWithFrame:CGRectMake(FRAME_WIDTH/2, FRAME_HEIGHT/3, FRAME_WIDTH/2, FRAME_HEIGHT/3)];
+            AppScrollView *image2 = [[AppScrollView alloc] initWithFrame:CGRectMake(FRAME_WIDTH/2, FRAME_HEIGHT/3, FRAME_WIDTH/2, FRAME_HEIGHT - (2*FRAME_HEIGHT)/3)];
             [self configureImage:image2];
             //right bottom third
-            AppScrollView *image3 = [[AppScrollView alloc] initWithFrame:CGRectMake(FRAME_WIDTH/2, (2*FRAME_HEIGHT)/3, FRAME_WIDTH/2, FRAME_HEIGHT/3)];
+            AppScrollView *image3 = [[AppScrollView alloc] initWithFrame:CGRectMake(FRAME_WIDTH/2, (2*FRAME_HEIGHT)/3, FRAME_WIDTH/2, FRAME_HEIGHT - (2*FRAME_HEIGHT)/3)];
             [self configureImage:image3];
             //left
             AppScrollView *image4 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, 0, FRAME_WIDTH/2, FRAME_HEIGHT)];
@@ -691,10 +691,10 @@ const int IPHONE_SCREEN = 480*320*4;
             AppScrollView *image1 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, 0, FRAME_WIDTH/2, FRAME_HEIGHT/3)];
             [self configureImage:image1];
             //left middle third
-            AppScrollView *image2 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, FRAME_HEIGHT/3, FRAME_WIDTH/2, FRAME_HEIGHT/3)];
+            AppScrollView *image2 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, FRAME_HEIGHT/3, FRAME_WIDTH/2, FRAME_HEIGHT - (2*FRAME_HEIGHT)/3)];
             [self configureImage:image2];
             //left bottom third
-            AppScrollView *image3 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, (2*FRAME_HEIGHT)/3, FRAME_WIDTH/2, FRAME_HEIGHT/3)];
+            AppScrollView *image3 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, (2*FRAME_HEIGHT)/3, FRAME_WIDTH/2, FRAME_HEIGHT - (2*FRAME_HEIGHT)/3)];
             [self configureImage:image3];
             //right
             AppScrollView *image4 = [[AppScrollView alloc] initWithFrame:CGRectMake(FRAME_WIDTH/2, 0, FRAME_WIDTH/2, FRAME_HEIGHT)];
@@ -749,10 +749,10 @@ const int IPHONE_SCREEN = 480*320*4;
             AppScrollView *image1 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, 0, FRAME_WIDTH/3, FRAME_HEIGHT/2)];
             [self configureImage:image1];
             //top middle
-            AppScrollView *image2 = [[AppScrollView alloc] initWithFrame:CGRectMake(FRAME_WIDTH/3, 0, FRAME_WIDTH/3, FRAME_HEIGHT/2)];
+            AppScrollView *image2 = [[AppScrollView alloc] initWithFrame:CGRectMake(FRAME_WIDTH/3, 0, (2*FRAME_WIDTH/3)-FRAME_WIDTH/3, FRAME_HEIGHT/2)];
             [self configureImage:image2];
             //top right
-            AppScrollView *image3 = [[AppScrollView alloc] initWithFrame:CGRectMake((2*FRAME_WIDTH)/3, 0, FRAME_WIDTH/3, FRAME_HEIGHT/2)];
+            AppScrollView *image3 = [[AppScrollView alloc] initWithFrame:CGRectMake((2*FRAME_WIDTH)/3, 0, FRAME_WIDTH - (2*FRAME_WIDTH/3), FRAME_HEIGHT/2)];
             [self configureImage:image3];
             //bottom
             AppScrollView *image4 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, FRAME_HEIGHT/2, FRAME_WIDTH, FRAME_HEIGHT/2)];
@@ -806,10 +806,10 @@ const int IPHONE_SCREEN = 480*320*4;
             AppScrollView *image1 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, FRAME_HEIGHT/2, FRAME_WIDTH/3, FRAME_HEIGHT/2)];
             [self configureImage:image1];
             //bottom middle
-            AppScrollView *image2 = [[AppScrollView alloc] initWithFrame:CGRectMake(FRAME_WIDTH/3, FRAME_HEIGHT/2, FRAME_WIDTH/3, FRAME_HEIGHT/2)];
+            AppScrollView *image2 = [[AppScrollView alloc] initWithFrame:CGRectMake(FRAME_WIDTH/3, FRAME_HEIGHT/2, (2*FRAME_WIDTH/3)-FRAME_WIDTH/3, FRAME_HEIGHT/2)];
             [self configureImage:image2];
             //bottom right
-            AppScrollView *image3 = [[AppScrollView alloc] initWithFrame:CGRectMake((2*FRAME_WIDTH)/3, FRAME_HEIGHT/2, FRAME_WIDTH/3, FRAME_HEIGHT/2)];
+            AppScrollView *image3 = [[AppScrollView alloc] initWithFrame:CGRectMake((2*FRAME_WIDTH)/3, FRAME_HEIGHT/2, FRAME_WIDTH - (2*FRAME_WIDTH/3), FRAME_HEIGHT/2)];
             [self configureImage:image3];
             //top
             AppScrollView *image4 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, 0, FRAME_WIDTH, FRAME_HEIGHT/2)];
@@ -861,30 +861,30 @@ const int IPHONE_SCREEN = 480*320*4;
             AppScrollView *image1 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, 0, FRAME_WIDTH/3, FRAME_HEIGHT/3)];
             [self configureImage:image1];
             //top middle
-            AppScrollView *image2 = [[AppScrollView alloc] initWithFrame:CGRectMake(FRAME_WIDTH/3, 0, FRAME_WIDTH/3, FRAME_HEIGHT/3)];
+            AppScrollView *image2 = [[AppScrollView alloc] initWithFrame:CGRectMake(FRAME_WIDTH/3, 0, (2*FRAME_WIDTH)/3 - FRAME_WIDTH/3, FRAME_HEIGHT/3)];
             [self configureImage:image2];
             //top right
-            AppScrollView *image3 = [[AppScrollView alloc] initWithFrame:CGRectMake((2*FRAME_WIDTH)/3, 0, FRAME_WIDTH/3, FRAME_HEIGHT/3)];
+            AppScrollView *image3 = [[AppScrollView alloc] initWithFrame:CGRectMake((2*FRAME_WIDTH)/3, 0, FRAME_WIDTH-(2*FRAME_WIDTH)/3, FRAME_HEIGHT/3)];
             [self configureImage:image3];
             
             //middle left
-            AppScrollView *image4 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, FRAME_HEIGHT/3, FRAME_WIDTH/3, FRAME_HEIGHT/3)];
+            AppScrollView *image4 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, FRAME_HEIGHT/3, FRAME_WIDTH/3, (2*FRAME_HEIGHT)/3 -FRAME_HEIGHT/3)];
             [self configureImage:image4];
             //middle middle
-            AppScrollView *image5 = [[AppScrollView alloc] initWithFrame:CGRectMake(FRAME_WIDTH/3, FRAME_HEIGHT/3, FRAME_WIDTH/3, FRAME_HEIGHT/3)];
+            AppScrollView *image5 = [[AppScrollView alloc] initWithFrame:CGRectMake(FRAME_WIDTH/3, FRAME_HEIGHT/3, (2*FRAME_WIDTH)/3 - FRAME_WIDTH/3, (2*FRAME_HEIGHT)/3 -FRAME_HEIGHT/3)];
             [self configureImage:image5];
             //middle right
-            AppScrollView *image6 = [[AppScrollView alloc] initWithFrame:CGRectMake((2*FRAME_WIDTH)/3, FRAME_HEIGHT/3, FRAME_WIDTH/3, FRAME_HEIGHT/3)];
+            AppScrollView *image6 = [[AppScrollView alloc] initWithFrame:CGRectMake((2*FRAME_WIDTH)/3, FRAME_HEIGHT/3, FRAME_WIDTH-(2*FRAME_WIDTH)/3, (2*FRAME_HEIGHT)/3 -FRAME_HEIGHT/3)];
             [self configureImage:image6];
             
             //bottom left
-            AppScrollView *image7 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, (2*FRAME_HEIGHT)/3, FRAME_WIDTH/3, FRAME_HEIGHT/3)];
+            AppScrollView *image7 = [[AppScrollView alloc] initWithFrame:CGRectMake(0, (2*FRAME_HEIGHT)/3, FRAME_WIDTH/3, FRAME_HEIGHT - (2*FRAME_HEIGHT)/3)];
             [self configureImage:image7];
             //bottom middle
-            AppScrollView *image8 = [[AppScrollView alloc] initWithFrame:CGRectMake(FRAME_WIDTH/3, (2*FRAME_HEIGHT)/3, FRAME_WIDTH/3, FRAME_HEIGHT/3)];
+            AppScrollView *image8 = [[AppScrollView alloc] initWithFrame:CGRectMake(FRAME_WIDTH/3, (2*FRAME_HEIGHT)/3, (2*FRAME_WIDTH)/3 - FRAME_WIDTH/3, FRAME_HEIGHT - (2*FRAME_HEIGHT)/3)];
             [self configureImage:image8];
             //bottom right
-            AppScrollView *image9 = [[AppScrollView alloc] initWithFrame:CGRectMake((2*FRAME_WIDTH)/3, (2*FRAME_HEIGHT)/3, FRAME_WIDTH/3, FRAME_HEIGHT/3)];
+            AppScrollView *image9 = [[AppScrollView alloc] initWithFrame:CGRectMake((2*FRAME_WIDTH)/3, (2*FRAME_HEIGHT)/3, FRAME_WIDTH-(2*FRAME_WIDTH)/3, FRAME_HEIGHT - (2*FRAME_HEIGHT)/3)];
             [self configureImage:image9];
             
             //top gap sliders
@@ -1030,9 +1030,10 @@ const int IPHONE_SCREEN = 480*320*4;
     return scrollView.pic;
 }
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event from:(AppScrollView *)view {
+- (void)addImage:(NSNotification *)info {
     NSLog(@"tap gesture recognized");
     UIImage *loadedImage = [UIImage imageNamed:@"test"];
+    AppScrollView *view = [info.object objectForKey:@"view"];
     [view.pic setImage:loadedImage];
     view.contentSize = view.pic.image.size;
     view.pic.frame = CGRectMake(0, 0, loadedImage.size.width , loadedImage.size.height);
@@ -1085,14 +1086,16 @@ const int IPHONE_SCREEN = 480*320*4;
         
         int finalX = view.frame.origin.x *CONVERSION_RATIO;
         int finalY = view.frame.origin.y *CONVERSION_RATIO;
-        int finalWidth = 480 - (int)((330.0 - view.frame.origin.x - view.frame.size.width - .5) * CONVERSION_RATIO) - (int)(view.frame.origin.x*CONVERSION_RATIO);
-        int finalHeight = 320 - (int)((220.0 - view.frame.origin.y - view.frame.size.height - .5) * CONVERSION_RATIO) - (int)(view.frame.origin.y*CONVERSION_RATIO);
-        int pixelWidth = finalWidth;
+        NSLog(@"frame width %f",view.frame.size.width);
+        NSLog(@"frame origin x %f",view.frame.origin.x);
         
-        int initialWidth = view.frame.size.width;
-        int initialHeight = view.frame.size.height;
-        int startY = finalY * 320;
-        int startByte = startY + finalX;
+        int endX = (220.0 - view.frame.size.width - view.frame.origin.x) * CONVERSION_RATIO;
+        NSLog(@"endX %d",endX);
+        int finalWidth = 320 - endX - finalX;
+        NSLog(@"final width %d",finalWidth);
+        int endY = (330.0 - view.frame.size.height - view.frame.origin.y) * CONVERSION_RATIO;
+        int finalHeight = 480 - endY - finalY;
+        NSLog(@"final height %d",finalHeight);
         int byte = (finalY *320 +finalX)*4;
         for(float y=0.0; y<finalHeight; ++y) {
             int yCoord = yVal + y*totalZoom;
@@ -1109,7 +1112,7 @@ const int IPHONE_SCREEN = 480*320*4;
                 rawData[byte+3] = (char)255;
                 byte += 4;
             }
-            byte += (320 - pixelWidth)*4;
+            byte += (320 - finalWidth)*4;
         }
 
     }
@@ -1121,6 +1124,7 @@ const int IPHONE_SCREEN = 480*320*4;
 
     UIImage* rawImage = [UIImage imageWithCGImage:imageRef];  
    
+    CGColorSpaceRelease(colorSpace);
     CGContextRelease(final); 
     free(rawData);
     
@@ -1168,8 +1172,6 @@ const int IPHONE_SCREEN = 480*320*4;
         [matching setContentOffset:image.offset];
         ++y;
     }
-    
-    
 }
 
 -(UIImage *) retrieveImageForURL:(NSString *)url {
