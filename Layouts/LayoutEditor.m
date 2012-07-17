@@ -12,6 +12,8 @@
 #import "SliderMetadata.h"
 #import "ImageMetadata.h"
 #import "FilterMetadata.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+
 
 #import "LayoutViewController.h"
 #import "AppSlider.h"
@@ -1175,6 +1177,20 @@ const int IPHONE_SCREEN = 480*320*4;
 }
 
 -(UIImage *) retrieveImageForURL:(NSString *)url {
+    __block UIImage *img;
+    if([url hasPrefix:@"asset"]) {
+        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+        [library assetForURL:[NSURL URLWithString:url] resultBlock:^(ALAsset *result) {
+            img = [UIImage imageWithCGImage:[[result defaultRepresentation] fullScreenImage]];
+            } failureBlock:^(NSError *error) {
+                NSLog(@"Failed to add local photo to layout.");
+            }];
+        return img;
+    } else if([url hasPrefix:@"http"]) {
+        NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: url]];
+        img = [UIImage imageWithData: imageData];
+    }
+    
     return [UIImage imageNamed:@"test"];
 }
 

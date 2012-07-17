@@ -7,11 +7,19 @@
 //
 
 #import "Preview.h"
+#import "Filters.h"
+#import <QuartzCore/QuartzCore.h>
+
+@interface Preview()
+
+@property (nonatomic, weak) Filters *filter;
+@end
 
 @implementation Preview
 
 @synthesize pictureFrame = _pictureFrame;
 @synthesize picture = _picture;
+@synthesize filter = _filter;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,6 +53,11 @@
 {
     [super viewDidLoad];
     [self.pictureFrame setImage:self.picture];
+    
+    
+    Filters *filter = [[Filters alloc] init];
+    [self.pictureFrame setImage:[filter Fluffy:self.picture Text:@"Testing"]];
+
 }
 
 - (void)viewDidUnload

@@ -10,4 +10,6 @@
 
 @interface Filters : NSObject
 
+-(UIImage *)Bacon:(UIImage *)image;
+-(UIImage *)Fluffy:(UIImage *)image Text:(NSString *)title;
 @end

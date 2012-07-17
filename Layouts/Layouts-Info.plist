@@ -38,5 +38,20 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Bauhaus 93.</string>
+		<string>CA Traktor.bmap</string>
+		<string>CA Traktor.suit</string>
+		<string>comesinhandy.tff</string>
+		<string>HelveticaCY.dfont</string>
+		<string>IrvingKO-Bold.tff</string>
+		<string>Jellyka_Estrya_Handwriting.tff</string>
+		<string>Menlo.ttc</string>
+		<string>Microsoft Sans Serif.tff</string>
+		<string>Mistral</string>
+		<string>MyriadPro-Cond.otf</string>
+		<string>Perpetua Bold.tff</string>
+	</array>
 </dict>
 </plist>
