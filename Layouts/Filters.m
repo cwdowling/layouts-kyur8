@@ -371,8 +371,8 @@ CGColorRef *)endColor {
     NSArray *overlayLocations = [NSArray arrayWithObjects:(id)overlayStopOne,overlayStopTwo,overlayStopThree,overlayStopFour,overlayStopFive,overlayStopSix,overlayStopSeven, nil];
     gradientOverlay.locations = overlayLocations;
     
-    [gradientOverlay setStartPoint:CGPointMake(-0.25, 1.25)];
-    [gradientOverlay setEndPoint:CGPointMake(4.0 ,-3.0)];
+    [gradientOverlay setStartPoint:CGPointMake(-1.5, 2.0)];
+    [gradientOverlay setEndPoint:CGPointMake(7.0 ,-5.0)];
     gradientOverlay.frame = CGRectMake(0, 0, 320, 480);
     
 
