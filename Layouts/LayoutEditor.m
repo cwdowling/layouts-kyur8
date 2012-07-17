@@ -1034,7 +1034,7 @@ const int IPHONE_SCREEN = 480*320*4;
 
 - (void)addImage:(NSNotification *)info {
     NSLog(@"tap gesture recognized");
-    UIImage *loadedImage = [UIImage imageNamed:@"test"];
+    UIImage *loadedImage = [UIImage imageNamed:@"theme-CleanColorDodge"];
     AppScrollView *view = [info.object objectForKey:@"view"];
     [view.pic setImage:loadedImage];
     view.contentSize = view.pic.image.size;

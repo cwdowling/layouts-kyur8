@@ -51,9 +51,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    [self.pictureFrame setImage:self.picture];
-    
+    [super viewDidLoad];    
     
     Filters *filter = [[Filters alloc] init];
     [self.pictureFrame setImage:[filter Fluffy:self.picture Text:@"Testing"]];

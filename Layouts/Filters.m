@@ -16,6 +16,7 @@
 @property(nonatomic,strong) CIContext *context;
 @property(nonatomic,strong) CIImage *beginImage;
 @property(nonatomic,strong) CIFilter *filter;
+-(CAGradientLayer *)PurpleBlueGradientOverlay;
 
 @end
 
@@ -24,6 +25,35 @@
 @synthesize context;
 @synthesize beginImage;
 @synthesize filter;
+
+-(CAGradientLayer *)PurpleBlueGradientOverlay {
+    CAGradientLayer *gradientOverlay = [CAGradientLayer layer];
+    UIColor *overlayColorOne = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
+    UIColor *overlayColorTwo = [UIColor colorWithRed:1 green:0 blue:1 alpha:1];
+    UIColor *overlayColorThree = [UIColor colorWithRed:0 green:0 blue:1 alpha:1];
+    UIColor *overlayColorFour = [UIColor colorWithRed:0 green:1 blue:1 alpha:1];
+    UIColor *overlayColorFive = [UIColor colorWithRed:0 green:1 blue:0 alpha:1];
+    UIColor *overlayColorSix = [UIColor colorWithRed:1 green:1 blue:0 alpha:1];
+    UIColor *overlayColorSeven = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
+    NSArray *overlayColors = [NSArray arrayWithObjects:(id) overlayColorOne.CGColor,overlayColorTwo.CGColor,overlayColorThree.CGColor,overlayColorFour.CGColor,overlayColorFive.CGColor,overlayColorSix.CGColor,overlayColorSeven.CGColor, nil];
+    gradientOverlay.colors = overlayColors;
+    
+    NSNumber *overlayStopOne = [NSNumber numberWithFloat:0.0];
+    NSNumber *overlayStopTwo = [NSNumber numberWithFloat:0.17];
+    NSNumber *overlayStopThree = [NSNumber numberWithFloat:0.33];
+    NSNumber *overlayStopFour = [NSNumber numberWithFloat:0.50];
+    NSNumber *overlayStopFive = [NSNumber numberWithFloat:0.67];
+    NSNumber *overlayStopSix = [NSNumber numberWithFloat:0.83];
+    NSNumber *overlayStopSeven = [NSNumber numberWithFloat:1.0];
+    NSArray *overlayLocations = [NSArray arrayWithObjects:(id)overlayStopOne,overlayStopTwo,overlayStopThree,overlayStopFour,overlayStopFive,overlayStopSix,overlayStopSeven, nil];
+    gradientOverlay.locations = overlayLocations;
+    
+    [gradientOverlay setStartPoint:CGPointMake(-0.25, 1.25)];
+    [gradientOverlay setEndPoint:CGPointMake(4.0 ,-3.0)];
+    gradientOverlay.frame = CGRectMake(0, 0, 320, 480);
+    
+}
+
 
 -(UIImage *)twoColorLinearGradient {
     filter = [CIFilter filterWithName:@"CILinearGradient" keysAndValues:@"inputPoint0",[CIVector vectorWithX:0 Y:0], @"inputPoint1",[CIVector vectorWithX:320 Y:480],@"inputcolor0",[CIColor colorWithRed:255 green:0 blue:0 alpha:0], @"inputcolor1",[CIColor colorWithRed:0 green:0 blue:255 alpha:0], nil];
@@ -134,18 +164,17 @@ CGColorRef *)endColor {
     context = [CIContext contextWithOptions:nil];
     
     //base image
-        //gradient overlay
-    filter = [CIFilter filterWithName:@"CIScreenBlendMode"];
-    [filter setValue:image forKey:@"inputImage"];
+    //gradient overlay
+    CAGradientLayer *gradientOverlay = [self PurpleBlueGradientOverlay];
     
-    //CIImage *gradient = [self createGradient];
-
-    CIImage *outputImage = [filter outputImage];
+    UIGraphicsBeginImageContext(image.size);
+    [gradientOverlay renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *gradientOverlayImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
     
-    CGImageRef cgimg = [context createCGImage:outputImage fromRect:[outputImage extent]];
-    UIImage *newImg = [UIImage imageWithCGImage:cgimg];    
-    CGImageRelease(cgimg);
-    return newImg;
+    //Assemble Image
+    
+    
 }
 
 -(UIImage *)Downer:(UIImage *)image {
@@ -242,13 +271,10 @@ CGColorRef *)endColor {
 }
 
 -(UIImage *)Fluffy:(UIImage *)image Text:(NSString *)title {
-    beginImage = [CIImage imageWithCGImage:[image CGImage]];
-    context = [CIContext contextWithOptions:nil];
-    
     
     //Text
     UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:100];
-    UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
+    UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 150)];
     [text setFont:font];
     [text setText:title];
     text.backgroundColor = [UIColor clearColor];
@@ -301,7 +327,7 @@ CGColorRef *)endColor {
     
     CAGradientLayer *rainbowFilter = [CAGradientLayer layer];
     UIColor *red = [UIColor colorWithRed:225.0/255.0 green:0 blue:25/255.0 alpha:1.0];
-    UIColor *green = [UIColor colorWithRed:202.0/255.0 green:227.0/255.0 blue:204.0/255/0 alpha:1.0];
+    UIColor *green = [UIColor colorWithRed:0.0 green:96.0/255.0 blue:27.0/255.0 alpha:1.0];
     NSArray *rainbowColors = [NSArray arrayWithObjects:(id)red.CGColor, green.CGColor, nil];
     rainbowFilter.colors = rainbowColors;
 
@@ -310,7 +336,7 @@ CGColorRef *)endColor {
     NSArray *rainbowLocations = [NSArray arrayWithObjects:begin, end, nil];
     rainbowFilter.locations = rainbowLocations;
     
-    [rainbowFilter setStartPoint:CGPointMake(-0.5, -0.5)];
+    [rainbowFilter setStartPoint:CGPointMake(-1.5, -1.5)];
     [rainbowFilter setEndPoint:CGPointMake(1.0, 1.0)];
     rainbowFilter.frame = CGRectMake(0, 0, image.size.width, image.size.height);
     
@@ -322,6 +348,8 @@ CGColorRef *)endColor {
     //Main Image
     
     //gradient overlay (Blend Mode = Screen)
+    //CAGradientLayer *gradientOverlay = [self PurpleBlueGradientOverlay];
+    
     CAGradientLayer *gradientOverlay = [CAGradientLayer layer];
     UIColor *overlayColorOne = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
     UIColor *overlayColorTwo = [UIColor colorWithRed:1 green:0 blue:1 alpha:1];
@@ -347,32 +375,23 @@ CGColorRef *)endColor {
     [gradientOverlay setEndPoint:CGPointMake(4.0 ,-3.0)];
     gradientOverlay.frame = CGRectMake(0, 0, 320, 480);
     
+
     UIGraphicsBeginImageContext(image.size);
     [gradientOverlay renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *gradientOverlayImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
+    
+    //Assemble Image
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
     [gradientOverlayImage drawInRect:CGRectMake(0,0,image.size.width,image.size.height) blendMode:kCGBlendModeScreen alpha:0.4];
-    [rainbowImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeNormal alpha:0.5];
+    [rainbowImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeLighten alpha:0.5];
     [viewImage drawInRect:CGRectMake(0, 0, 320, 150)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
     return newImage;
-    //Assemble
-
-    
-    CIImage *outputImage = [filter outputImage];
-    
-    CGImageRef cgimg = [context createCGImage:outputImage fromRect:[outputImage extent]];
-    
-    UIImage *newImg = [UIImage imageWithCGImage:cgimg];    
-    
-    CGImageRelease(cgimg);
-    
-    return newImg;
 }
 
 -(UIImage *)JustRight:(UIImage *)image {
