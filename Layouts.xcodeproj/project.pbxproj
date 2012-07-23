@@ -35,7 +35,7 @@
 		E9A9A3C91592242400C11DA8 /* LayoutEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A9A3C81592242400C11DA8 /* LayoutEditor.m */; };
 		E9A9A3CB1592253A00C11DA8 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = E9A9A3CA1592253A00C11DA8 /* test.png */; };
 		E9A9A3D51592668600C11DA8 /* Preview.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A9A3D41592668600C11DA8 /* Preview.m */; };
-		E9ACE7BD15B5F6E20057C5D2 /* theme-CleanColorDodge.png in Resources */ = {isa = PBXBuildFile; fileRef = E9ACE7BC15B5F6E20057C5D2 /* theme-CleanColorDodge.png */; };
+		E9ACE7BD15B5F6E20057C5D2 /* panda.png in Resources */ = {isa = PBXBuildFile; fileRef = E9ACE7BC15B5F6E20057C5D2 /* panda.png */; };
 		E9BDEA4915B0C16F00B53F54 /* Bauhaus 93 in Resources */ = {isa = PBXBuildFile; fileRef = E9BDEA3C15B0C16F00B53F54 /* Bauhaus 93 */; };
 		E9BDEA4A15B0C16F00B53F54 /* CA Traktor.bmap in Resources */ = {isa = PBXBuildFile; fileRef = E9BDEA3D15B0C16F00B53F54 /* CA Traktor.bmap */; };
 		E9BDEA4B15B0C16F00B53F54 /* CA Traktor.suit in Resources */ = {isa = PBXBuildFile; fileRef = E9BDEA3E15B0C16F00B53F54 /* CA Traktor.suit */; };
@@ -113,7 +113,7 @@
 		E9A9A3CA1592253A00C11DA8 /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = test.png; path = ../../Desktop/test.png; sourceTree = "<group>"; };
 		E9A9A3D31592668600C11DA8 /* Preview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preview.h; sourceTree = "<group>"; };
 		E9A9A3D41592668600C11DA8 /* Preview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Preview.m; sourceTree = "<group>"; };
-		E9ACE7BC15B5F6E20057C5D2 /* theme-CleanColorDodge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "theme-CleanColorDodge.png"; sourceTree = "<group>"; };
+		E9ACE7BC15B5F6E20057C5D2 /* panda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panda.png; sourceTree = "<group>"; };
 		E9BDEA3C15B0C16F00B53F54 /* Bauhaus 93 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Bauhaus 93"; sourceTree = "<group>"; };
 		E9BDEA3D15B0C16F00B53F54 /* CA Traktor.bmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "CA Traktor.bmap"; sourceTree = "<group>"; };
 		E9BDEA3E15B0C16F00B53F54 /* CA Traktor.suit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "CA Traktor.suit"; sourceTree = "<group>"; };
@@ -225,7 +225,7 @@
 				E9A9A3D41592668600C11DA8 /* Preview.m */,
 				E9A9A3C71592242400C11DA8 /* LayoutEditor.h */,
 				E9A9A3C81592242400C11DA8 /* LayoutEditor.m */,
-				E9ACE7BC15B5F6E20057C5D2 /* theme-CleanColorDodge.png */,
+				E9ACE7BC15B5F6E20057C5D2 /* panda.png */,
 				E9DBCEC315AB837900C83178 /* Metadata Objects */,
 				E994B428159A3C1100B5FDBE /* BlendSwitch.h */,
 				E994B429159A3C1100B5FDBE /* BlendSwitch.m */,
@@ -401,7 +401,7 @@
 				E9BDEA5315B0C16F00B53F54 /* Mistral in Resources */,
 				E9BDEA5415B0C16F00B53F54 /* MyriadPro-Cond.otf in Resources */,
 				E9BDEA5515B0C16F00B53F54 /* Perpetua Bold.ttf in Resources */,
-				E9ACE7BD15B5F6E20057C5D2 /* theme-CleanColorDodge.png in Resources */,
+				E9ACE7BD15B5F6E20057C5D2 /* panda.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

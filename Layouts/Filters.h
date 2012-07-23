@@ -10,6 +10,13 @@
 
 @interface Filters : NSObject
 
--(UIImage *)Bacon:(UIImage *)image;
+-(UIImage *)Bacon:(UIImage *)image Text:(NSString *)title;
+-(UIImage *)Bitchin:(UIImage *)image Text:(NSString *)title;
 -(UIImage *)Fluffy:(UIImage *)image Text:(NSString *)title;
+-(UIImage *)Clean:(UIImage *)image Text:(NSString *)title;
+-(UIImage *)Downer:(UIImage *)image Text:(NSString *)title;
+-(UIImage *)JustRight:(UIImage *)image Text:(NSString *)title;
+-(UIImage *)Knockout:(UIImage *)image Text:(NSString *)title;
+-(UIImage *)LiteRite:(UIImage *)image Text:(NSString *)title;
+
 @end

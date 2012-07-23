@@ -472,7 +472,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="fQd-wZ-aZU">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="-64" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                         </subviews>
@@ -487,9 +487,40 @@
             <point key="canvasLocation" x="2415" y="70"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="AppView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AppView.h"/>
+        </class>
+        <class className="KYUR8MasterViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/KYUR8MasterViewController.h"/>
+        </class>
+        <class className="LayoutEditor" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LayoutEditor.h"/>
+            <relationships>
+                <relationship kind="action" name="sliderChanged:"/>
+                <relationship kind="outlet" name="instruction" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="next" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="pictureSpace" candidateClass="UIView"/>
+                <relationship kind="outlet" name="preview" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="LayoutViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/LayoutViewController.h"/>
+        </class>
+        <class className="Preview" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/Preview.h"/>
+            <relationships>
+                <relationship kind="outlet" name="pictureFrame" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="lG8-72-aWE"/>
+        <segue reference="e85-Fp-aZE"/>
+    </inferredMetricsTieBreakers>
 </document>
