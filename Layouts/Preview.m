@@ -54,7 +54,7 @@
     [super viewDidLoad];    
     
     Filters *filter = [[Filters alloc] init];
-    [self.pictureFrame setImage:[filter Bacon:self.picture Text:@"Testing"]];
+    [self.pictureFrame setImage:[filter Scrawl:self.picture Text:@"Testing"]];
 
 }
 

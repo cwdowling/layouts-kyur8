@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E90F3B3715BDE8A900B95F61 /* Longwash_Mask.png in Resources */ = {isa = PBXBuildFile; fileRef = E90F3B3515BDE8A900B95F61 /* Longwash_Mask.png */; };
+		E90F3B3815BDE8A900B95F61 /* Texture_2.png in Resources */ = {isa = PBXBuildFile; fileRef = E90F3B3615BDE8A900B95F61 /* Texture_2.png */; };
+		E90F3B3B15BDEE6C00B95F61 /* DropLeft_Mask.png in Resources */ = {isa = PBXBuildFile; fileRef = E90F3B3915BDEE6C00B95F61 /* DropLeft_Mask.png */; };
+		E90F3B3C15BDEE6C00B95F61 /* DropRight_Mask.png in Resources */ = {isa = PBXBuildFile; fileRef = E90F3B3A15BDEE6C00B95F61 /* DropRight_Mask.png */; };
 		E945D50915936C4C00923FD4 /* AppScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E945D50815936C4C00923FD4 /* AppScrollView.m */; };
 		E945D511159385D200923FD4 /* AppView.m in Sources */ = {isa = PBXBuildFile; fileRef = E945D510159385D200923FD4 /* AppView.m */; };
 		E945D51715939D5D00923FD4 /* AppSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = E945D51615939D5D00923FD4 /* AppSlider.m */; };
@@ -50,6 +54,10 @@
 		E9BDEA5415B0C16F00B53F54 /* MyriadPro-Cond.otf in Resources */ = {isa = PBXBuildFile; fileRef = E9BDEA4715B0C16F00B53F54 /* MyriadPro-Cond.otf */; };
 		E9BDEA5515B0C16F00B53F54 /* Perpetua Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9BDEA4815B0C16F00B53F54 /* Perpetua Bold.ttf */; };
 		E9C339ED15AC81E2001444D9 /* Filters.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C339EC15AC81E2001444D9 /* Filters.m */; };
+		E9CA1D6E15BF08F300EDD35B /* Texture_1.png in Resources */ = {isa = PBXBuildFile; fileRef = E9CA1D6D15BF08F300EDD35B /* Texture_1.png */; };
+		E9CA1D7215BF3F0800EDD35B /* Texture_3.png in Resources */ = {isa = PBXBuildFile; fileRef = E9CA1D7015BF3F0800EDD35B /* Texture_3.png */; };
+		E9CA1D7315BF3F0800EDD35B /* Rugged_Mask.png in Resources */ = {isa = PBXBuildFile; fileRef = E9CA1D7115BF3F0800EDD35B /* Rugged_Mask.png */; };
+		E9CA1D7515BF47C100EDD35B /* Texture_4.png in Resources */ = {isa = PBXBuildFile; fileRef = E9CA1D7415BF47C100EDD35B /* Texture_4.png */; };
 		E9D305FC15ACC1EE002033A6 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9D305FB15ACC1EE002033A6 /* CoreImage.framework */; };
 		E9DBCEBB15AB276300C83178 /* cleartrack.png in Resources */ = {isa = PBXBuildFile; fileRef = E9DBCEB915AB276300C83178 /* cleartrack.png */; };
 		E9DBCEBC15AB276300C83178 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = E9DBCEBA15AB276300C83178 /* add.png */; };
@@ -71,6 +79,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E90F3B3515BDE8A900B95F61 /* Longwash_Mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Longwash_Mask.png; sourceTree = "<group>"; };
+		E90F3B3615BDE8A900B95F61 /* Texture_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Texture_2.png; sourceTree = "<group>"; };
+		E90F3B3915BDEE6C00B95F61 /* DropLeft_Mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DropLeft_Mask.png; sourceTree = "<group>"; };
+		E90F3B3A15BDEE6C00B95F61 /* DropRight_Mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DropRight_Mask.png; sourceTree = "<group>"; };
 		E945D50715936C4C00923FD4 /* AppScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppScrollView.h; sourceTree = "<group>"; };
 		E945D50815936C4C00923FD4 /* AppScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppScrollView.m; sourceTree = "<group>"; };
 		E945D50F159385D200923FD4 /* AppView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppView.h; sourceTree = "<group>"; };
@@ -129,6 +141,10 @@
 		E9BDEA4815B0C16F00B53F54 /* Perpetua Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Perpetua Bold.ttf"; sourceTree = "<group>"; };
 		E9C339EB15AC81E1001444D9 /* Filters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filters.h; sourceTree = "<group>"; };
 		E9C339EC15AC81E2001444D9 /* Filters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Filters.m; sourceTree = "<group>"; };
+		E9CA1D6D15BF08F300EDD35B /* Texture_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Texture_1.png; sourceTree = "<group>"; };
+		E9CA1D7015BF3F0800EDD35B /* Texture_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Texture_3.png; sourceTree = "<group>"; };
+		E9CA1D7115BF3F0800EDD35B /* Rugged_Mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rugged_Mask.png; sourceTree = "<group>"; };
+		E9CA1D7415BF47C100EDD35B /* Texture_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Texture_4.png; sourceTree = "<group>"; };
 		E9D305FB15ACC1EE002033A6 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		E9DBCEB915AB276300C83178 /* cleartrack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cleartrack.png; path = Layouts/cleartrack.png; sourceTree = "<group>"; };
 		E9DBCEBA15AB276300C83178 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add.png; path = Layouts/add.png; sourceTree = "<group>"; };
@@ -172,6 +188,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E90F3B3415BDE8A900B95F61 /* Filter Supporting Pictures */ = {
+			isa = PBXGroup;
+			children = (
+				E9CA1D7415BF47C100EDD35B /* Texture_4.png */,
+				E9CA1D7015BF3F0800EDD35B /* Texture_3.png */,
+				E9CA1D7115BF3F0800EDD35B /* Rugged_Mask.png */,
+				E9CA1D6D15BF08F300EDD35B /* Texture_1.png */,
+				E90F3B3915BDEE6C00B95F61 /* DropLeft_Mask.png */,
+				E90F3B3A15BDEE6C00B95F61 /* DropRight_Mask.png */,
+				E90F3B3515BDE8A900B95F61 /* Longwash_Mask.png */,
+				E90F3B3615BDE8A900B95F61 /* Texture_2.png */,
+			);
+			path = "Filter Supporting Pictures";
+			sourceTree = "<group>";
+		};
 		E9A9A3771592218800C11DA8 = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +265,7 @@
 				E945D50F159385D200923FD4 /* AppView.h */,
 				E945D510159385D200923FD4 /* AppView.m */,
 				E9A9A3A01592218800C11DA8 /* KYUR8MasterViewController.h */,
+				E90F3B3415BDE8A900B95F61 /* Filter Supporting Pictures */,
 				E9A9A3A11592218800C11DA8 /* KYUR8MasterViewController.m */,
 				E994B42C159A55B700B5FDBE /* transparent.png */,
 				E9A9A3C4159222C500C11DA8 /* LayoutViewController.h */,
@@ -402,6 +434,14 @@
 				E9BDEA5415B0C16F00B53F54 /* MyriadPro-Cond.otf in Resources */,
 				E9BDEA5515B0C16F00B53F54 /* Perpetua Bold.ttf in Resources */,
 				E9ACE7BD15B5F6E20057C5D2 /* panda.png in Resources */,
+				E90F3B3715BDE8A900B95F61 /* Longwash_Mask.png in Resources */,
+				E90F3B3815BDE8A900B95F61 /* Texture_2.png in Resources */,
+				E90F3B3B15BDEE6C00B95F61 /* DropLeft_Mask.png in Resources */,
+				E90F3B3C15BDEE6C00B95F61 /* DropRight_Mask.png in Resources */,
+				E9CA1D6E15BF08F300EDD35B /* Texture_1.png in Resources */,
+				E9CA1D7215BF3F0800EDD35B /* Texture_3.png in Resources */,
+				E9CA1D7315BF3F0800EDD35B /* Rugged_Mask.png in Resources */,
+				E9CA1D7515BF47C100EDD35B /* Texture_4.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
