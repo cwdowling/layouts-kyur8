@@ -40,12 +40,20 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
+		<string>BebasNeue.otf</string>
 		<string>Bauhaus 93.</string>
+		<string>BlackCasper.ttf</string>
+		<string>GoodDog.otf</string>
+		<string>Impact_Label</string>
+		<string>journal.ttf</string>
+		<string>minotaur.ttf</string>
+		<string>Molot.otf</string>
 		<string>CA Traktor.bmap</string>
 		<string>CA Traktor.suit</string>
 		<string>comesinhandy.tff</string>
 		<string>HelveticaCY.dfont</string>
 		<string>IrvingKO-Bold.tff</string>
+		<string>HelveticaNeue.dfont</string>
 		<string>Jellyka_Estrya_Handwriting.tff</string>
 		<string>Menlo.ttc</string>
 		<string>Microsoft Sans Serif.tff</string>

@@ -23,7 +23,8 @@ Longwash mask. original picture not visible at all
 Banding from 3+ color gradients
 PinSoftLight Blend Mode not supported
 ThornRose not right because of fill on rainbow filter in original psd file
-Rainbow requires angle gradient
+Rainbow requires angle gradient - fixed by adding image in library
+Ask about radsurf not being in the second set of filters
  
     TO DO
 fix the old CAGradientLayers
@@ -32,17 +33,19 @@ take out possible extra gradients
 */
 
 -(UIImage *)Bacon:(UIImage *)image Text:(NSString *)title {
+    //texture
+    UIImage *texture = [UIImage imageNamed:@"Texture_1"];
     
     //rainbow filter
-    CGFloat rainbowComponents[20] = {160.0/255.0, 134.0/255.0, 87.0/255.0, 1.0, 178.0/255.0, 143.0/255.0, 90.0/255.0, 1.0, 188.0/255.0, 147.0/255.0, 89.0/255.0, 1.0, 203.0/255.0, 183.0/255.0, 133.0/255.0, 1.0, 237.0/255.0, 235.0/255.0, 190.0/255.0, 1.0 };
-    size_t rainbowNumLocations = 5;
-    CGFloat rainbowLocations[5] = {0.0, 0.25, 0.46, 0.67, 1.0 };
+    CGFloat rainbowComponents[8] = {186.0/255.0, 144.0/255.0, 89.0/255.0, 1.0, 204.0/255.0, 185.0/255.0, 135.0/255.0, 1.0 };
+    size_t rainbowNumLocations = 2;
+    CGFloat rainbowLocations[2] = {0.0, 1.0 };
     CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
     
     CGGradientRef rainbow = CGGradientCreateWithColorComponents(rgb, rainbowComponents, rainbowLocations, rainbowNumLocations);
     
-    CGPoint start = CGPointMake(0.0, 600.0);
-    CGPoint end = CGPointMake(73.0, -120.0);
+    CGPoint start = CGPointMake(0.0, 480.0);
+    CGPoint end = CGPointMake(73.0, -0.0);
     
     UIGraphicsBeginImageContext(image.size);
     CGContextDrawLinearGradient(UIGraphicsGetCurrentContext(), rainbow, start, end, kCGGradientDrawsAfterEndLocation);
@@ -51,7 +54,8 @@ take out possible extra gradients
 
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
-    [rainbowImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeSoftLight alpha:1.0];
+    [rainbowImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeSoftLight alpha:0.64];
+    [texture drawInRect:CGRectMake(0, 0, image.size.width, image.size.width) blendMode:kCGBlendModeHardLight alpha:0.4];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
@@ -106,6 +110,38 @@ take out possible extra gradients
     [gradientOverlayImage drawInRect:CGRectMake(0,0,image.size.width,image.size.height) blendMode:kCGBlendModeScreen alpha:0.4];
     [rainbowImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeSoftLight alpha:1.0];
     //[viewImage drawInRect:CGRectMake(0, 0, 320, 150) blendMode:kCGBlendModeColorDodge alpha:1.0];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+-(UIImage *)Buhloo:(UIImage *)image Text:(NSString *)title {
+    //texture
+    UIImage *texture = [UIImage imageNamed:@"Texture_1"];
+    
+    //rainbow filter
+    CGFloat rainbowComponents[12] = {244.0/255.0, 238.0/255.0, 235.0/255.0, 1.0, 24.0/255.0, 48.0/255.0, 153.0/255.0, 1.0, 
+        10.0/255.0, 16.0/255.0, 41.0/255.0, 1.0};
+    size_t rainbowNumLocations = 3;
+    CGFloat rainbowLocations[5] = {0.0, 0.61, 1.0 };
+    CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
+    
+    CGGradientRef rainbow = CGGradientCreateWithColorComponents(rgb, rainbowComponents, rainbowLocations, rainbowNumLocations);
+    
+    CGPoint start = CGPointMake(0.0, 600.0);
+    CGPoint end = CGPointMake(73.0, -120.0);
+    
+    UIGraphicsBeginImageContext(image.size);
+    CGContextDrawLinearGradient(UIGraphicsGetCurrentContext(), rainbow, start, end, kCGGradientDrawsAfterEndLocation);
+    UIImage *rainbowImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();  
+    
+    //Assemble
+    UIGraphicsBeginImageContext(image.size);
+    [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
+    [rainbowImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeSoftLight alpha:1.0];
+    [texture drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeLighten alpha:0.4];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
@@ -168,6 +204,38 @@ take out possible extra gradients
     
     return newImage;
     
+}
+
+-(UIImage *)CutUp:(UIImage *)image Text:(NSString *)title {
+    //rainbow filter
+    CGFloat rainbowComponents[28] = {183.0/255.0, 21.0/255.0, 27.0/255.0, 1.0, 230.0/255.0, 65.0/255.0, 75.0/255.0, 1.0, 
+        233.0/255.0, 137.0/255.0, 123.0/255.0, 1.0,
+        124.0/255.0, 120.0/255.0, 184.0/255.0, 1.0,
+        0.0, 176.0/255.0, 176.0/255.0, 1.0,
+        123.0/255.0, 118.0/255.0, 182.0/255.0, 1.0,
+        231.0/255.0, 50.0/255.0, 47.0/255.0, 1.0 };
+    size_t rainbowNumLocations = 7;
+    CGFloat rainbowLocations[7] = {0.0, 0.15, 0.30, 0.47, 0.64, 0.79, 1.0 };
+    CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
+    
+    CGGradientRef rainbow = CGGradientCreateWithColorComponents(rgb, rainbowComponents, rainbowLocations, rainbowNumLocations);
+    
+    CGPoint start = CGPointMake(150.0, -480.0);
+    CGPoint end = CGPointMake(0.0, 960.0);
+    
+    UIGraphicsBeginImageContext(image.size);
+    CGContextDrawLinearGradient(UIGraphicsGetCurrentContext(), rainbow, start, end, kCGGradientDrawsAfterEndLocation);
+    UIImage *rainbowImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();  
+    
+    //Assemble
+    UIGraphicsBeginImageContext(image.size);
+    [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
+    [rainbowImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeSoftLight alpha:1.0];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 -(UIImage *)Downer:(UIImage *)image Text:(NSString *)title {
@@ -272,7 +340,7 @@ take out possible extra gradients
     return newImage;
 }
 
--(UIImage *)DropRight:(UIImage *)image {
+-(UIImage *)DropRight:(UIImage *)image Text:(NSString *)title {
     //Mask
     UIImage *mask = [UIImage imageNamed:@"DropRight_Mask"];
     
@@ -488,6 +556,38 @@ take out possible extra gradients
     return newImage;
 }
 
+-(UIImage *)Labels:(UIImage *)image Text:(NSString *)title {
+    //rainbow filter
+    CGFloat rainbowComponents[28] = {183.0/255.0, 21.0/255.0, 27.0/255.0, 1.0, 230.0/255.0, 65.0/255.0, 75.0/255.0, 1.0, 
+        233.0/255.0, 137.0/255.0, 123.0/255.0, 1.0,
+        124.0/255.0, 120.0/255.0, 184.0/255.0, 1.0,
+        0.0, 176.0/255.0, 176.0/255.0, 1.0,
+        123.0/255.0, 118.0/255.0, 182.0/255.0, 1.0,
+        231.0/255.0, 50.0/255.0, 47.0/255.0, 1.0 };
+    size_t rainbowNumLocations = 7;
+    CGFloat rainbowLocations[7] = {0.0, 0.15, 0.30, 0.47, 0.64, 0.79, 1.0 };
+    CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
+
+    CGGradientRef rainbow = CGGradientCreateWithColorComponents(rgb, rainbowComponents, rainbowLocations, rainbowNumLocations);
+
+    CGPoint start = CGPointMake(150.0, -480.0);
+    CGPoint end = CGPointMake(0.0, 960.0);
+    
+    UIGraphicsBeginImageContext(image.size);
+    CGContextDrawLinearGradient(UIGraphicsGetCurrentContext(), rainbow, start, end, kCGGradientDrawsAfterEndLocation);
+    UIImage *rainbowImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();  
+    
+    //Assemble
+    UIGraphicsBeginImageContext(image.size);
+    [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
+    [rainbowImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeSoftLight alpha:1.0];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
 -(UIImage *)LiteRite:(UIImage *)image Text:(NSString *)title {
     //base image
     
@@ -558,16 +658,56 @@ take out possible extra gradients
     return newImage;    
 }
 
--(UIImage *)PTA:(UIImage *)image {
+-(UIImage *)PTA:(UIImage *)image Text:(NSString *)title {
     //Diamond Gradient
+    UIImage *gradient = [UIImage imageNamed:@"PTA_Gradient"];
+    
     //text with gradient
+    
+    //Assemble
+    UIGraphicsBeginImageContext(image.size);
+    [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
+    [gradient drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeLighten alpha:1.0];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;  
 }
 
--(UIImage *)Purplicious:(UIImage *)image {
+-(UIImage *)Purplicious:(UIImage *)image Text:(NSString *)title {
     //texture
     UIImage *texture = [UIImage imageNamed:@"Texture_4"];
     
+    //filter
+    CGFloat rainbowComponents[20] = {
+        122.0/255.0,54.0/255.0,161.0/255.0,1.0, 
+        152.0/255.0,92.0/255.0,186.0/255.0,1.0,
+        120.0/255.0,94.0/255.0,135.0/255.0,1.0,
+        166.0/255.0,60.0/255.0,227.0/255.0,1.0,
+        237.0/255.0,235.0/255.0,190.0/255.0,1.0 };
+    size_t rainbowNumLocations = 5;
+    CGFloat rainbowLocations[5] = {0.0, 0.25, 0.46, 0.67, 1.0 };
+    CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
     
+    CGGradientRef rainbow = CGGradientCreateWithColorComponents(rgb, rainbowComponents, rainbowLocations, rainbowNumLocations);
+    
+    CGPoint start = CGPointMake(100.0, 120.0);
+    CGFloat end = 360;
+    
+    UIGraphicsBeginImageContext(image.size);
+    CGContextDrawRadialGradient(UIGraphicsGetCurrentContext(), rainbow, start, 0, start, end, kCGGradientDrawsAfterEndLocation);
+    UIImage *rainbowImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    //Assemble
+    UIGraphicsBeginImageContext(image.size);
+    [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
+    [rainbowImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeHardLight alpha:1.0];
+    [texture drawInRect:CGRectMake(0, 0, 320, 480) blendMode:kCGBlendModeSoftLight alpha:1.0];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;  
 }
 
 -(UIImage *)Radsurf:(UIImage *)image Text:(NSString *)title {
@@ -606,8 +746,17 @@ take out possible extra gradients
     return newImage;     
 }
 
--(UIImage *)Rainbow:(UIImage *)image {
-
+-(UIImage *)Rainbow:(UIImage *)image Text:(NSString *)title {
+    UIImage *gradient = [UIImage imageNamed:@"Rainbow_Gradient"];
+ 
+    //Assemble
+    UIGraphicsBeginImageContext(image.size);
+    [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
+    [gradient drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeLighten alpha:1.0];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 -(UIImage *)Rugged:(UIImage *)image Text:(NSString *)title {
@@ -647,6 +796,55 @@ take out possible extra gradients
 }
 
 -(UIImage *)Scrawl:(UIImage *)image Text:(NSString *)title {
+    //text
+    UIFont *font = [UIFont fontWithName:@"GoodDog" size:200];
+    UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 150)];
+    [text setFont:font];
+    [text setText:title];
+    text.backgroundColor = [UIColor clearColor];
+    text.textAlignment = UITextAlignmentCenter;
+    text.adjustsFontSizeToFitWidth = YES;    
+    
+    //text gradient
+    CGFloat textComponents[20] = {
+        246.0/255.0,241.0/255.0,178.0/255.0,1.0, 
+        202.0/255.0,227.0/255.0,204.0/255.0,1.0,
+        152.0/255.0,216.0/255.0,227.0/255.0,1.0,
+        106.0/255.0,182.0/255.0,203.0/255.0,1.0,
+        69.0/255.0,153.0/255.0,177.0/255.0,1.0 };
+    size_t textNumLocations = 5;
+    CGFloat textLocations[5] = {0.0, 0.31, 0.60, 0.80, 1.0 };
+    CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
+    
+    CGGradientRef rainbow = CGGradientCreateWithColorComponents(rgb, textComponents, textLocations, textNumLocations);
+    
+    CGPoint start = CGPointMake(0.0, 480.0);
+    CGPoint end = CGPointMake(0.0, 0.0);
+    
+    UIGraphicsBeginImageContext(image.size);
+    CGContextDrawLinearGradient(UIGraphicsGetCurrentContext(), rainbow, start, end, kCGGradientDrawsAfterEndLocation);
+    UIImage *textGradient = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    text.textColor = [UIColor colorWithPatternImage:textGradient];
+    
+    UIGraphicsBeginImageContext(text.frame.size);
+    [[text layer] renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *textImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    //Drop Shadow
+    [[text layer] setShadowOffset:CGSizeMake(0,1)];
+    [[text layer] setShadowColor:[[UIColor darkGrayColor] CGColor]];
+    [[text layer] setShadowRadius:24.0];
+    [[text layer] setShadowOpacity:1.0];
+    text.textColor = [UIColor colorWithWhite:0.0 alpha:0.1];
+    
+    UIGraphicsBeginImageContext(text.frame.size);
+    [[text layer] renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *shadowImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();  
+    
     //filter
     CGFloat components[20] = {250.0/255.0,229.0/255.0,177.0/255.0,1.0,
         244.0/255.0,190.0/255.0,178.0/255.0,1.0,
@@ -655,7 +853,6 @@ take out possible extra gradients
         132.0/255.0,106.0/255.0,175.0/255.0,1.0};
     size_t numLocations = 5;
     CGFloat locations[5] = {0.0,0.25,0.5,0.75,1.0};
-    CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
     
     CGGradientRef gradient = CGGradientCreateWithColorComponents(rgb, components, locations, numLocations);
     
@@ -671,6 +868,8 @@ take out possible extra gradients
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
     [gradientImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeOverlay alpha:1.0];
+    [textImage drawInRect:CGRectMake(0, 0, 320, 150) blendMode:kCGBlendModeHardLight alpha:1.0];
+    [shadowImage drawInRect:CGRectMake(0, 0, 320, 150) blendMode:kCGBlendModeNormal alpha:1.0];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     

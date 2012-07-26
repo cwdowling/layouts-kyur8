@@ -40,6 +40,15 @@
 		E9A9A3CB1592253A00C11DA8 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = E9A9A3CA1592253A00C11DA8 /* test.png */; };
 		E9A9A3D51592668600C11DA8 /* Preview.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A9A3D41592668600C11DA8 /* Preview.m */; };
 		E9ACE7BD15B5F6E20057C5D2 /* panda.png in Resources */ = {isa = PBXBuildFile; fileRef = E9ACE7BC15B5F6E20057C5D2 /* panda.png */; };
+		E9BB4CEB15C159C0008D08A0 /* Rainbow_Gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = E9BB4CEA15C159C0008D08A0 /* Rainbow_Gradient.png */; };
+		E9BB4CEE15C164EC008D08A0 /* PTA_Gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = E9BB4CED15C164EC008D08A0 /* PTA_Gradient.png */; };
+		E9BB4CF615C17EF9008D08A0 /* BebasNeue.otf in Resources */ = {isa = PBXBuildFile; fileRef = E9BB4CEF15C17EF9008D08A0 /* BebasNeue.otf */; };
+		E9BB4CF715C17EF9008D08A0 /* BlackCasper.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9BB4CF015C17EF9008D08A0 /* BlackCasper.ttf */; };
+		E9BB4CF815C17EF9008D08A0 /* GoodDog.otf in Resources */ = {isa = PBXBuildFile; fileRef = E9BB4CF115C17EF9008D08A0 /* GoodDog.otf */; };
+		E9BB4CF915C17EF9008D08A0 /* Impact_Label.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9BB4CF215C17EF9008D08A0 /* Impact_Label.ttf */; };
+		E9BB4CFA15C17EF9008D08A0 /* journal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9BB4CF315C17EF9008D08A0 /* journal.ttf */; };
+		E9BB4CFB15C17EF9008D08A0 /* minotaur.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9BB4CF415C17EF9008D08A0 /* minotaur.ttf */; };
+		E9BB4CFC15C17EF9008D08A0 /* Molot.otf in Resources */ = {isa = PBXBuildFile; fileRef = E9BB4CF515C17EF9008D08A0 /* Molot.otf */; };
 		E9BDEA4915B0C16F00B53F54 /* Bauhaus 93 in Resources */ = {isa = PBXBuildFile; fileRef = E9BDEA3C15B0C16F00B53F54 /* Bauhaus 93 */; };
 		E9BDEA4A15B0C16F00B53F54 /* CA Traktor.bmap in Resources */ = {isa = PBXBuildFile; fileRef = E9BDEA3D15B0C16F00B53F54 /* CA Traktor.bmap */; };
 		E9BDEA4B15B0C16F00B53F54 /* CA Traktor.suit in Resources */ = {isa = PBXBuildFile; fileRef = E9BDEA3E15B0C16F00B53F54 /* CA Traktor.suit */; };
@@ -126,6 +135,15 @@
 		E9A9A3D31592668600C11DA8 /* Preview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preview.h; sourceTree = "<group>"; };
 		E9A9A3D41592668600C11DA8 /* Preview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Preview.m; sourceTree = "<group>"; };
 		E9ACE7BC15B5F6E20057C5D2 /* panda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panda.png; sourceTree = "<group>"; };
+		E9BB4CEA15C159C0008D08A0 /* Rainbow_Gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rainbow_Gradient.png; sourceTree = "<group>"; };
+		E9BB4CED15C164EC008D08A0 /* PTA_Gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PTA_Gradient.png; sourceTree = "<group>"; };
+		E9BB4CEF15C17EF9008D08A0 /* BebasNeue.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BebasNeue.otf; sourceTree = "<group>"; };
+		E9BB4CF015C17EF9008D08A0 /* BlackCasper.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BlackCasper.ttf; sourceTree = "<group>"; };
+		E9BB4CF115C17EF9008D08A0 /* GoodDog.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GoodDog.otf; sourceTree = "<group>"; };
+		E9BB4CF215C17EF9008D08A0 /* Impact_Label.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact_Label.ttf; sourceTree = "<group>"; };
+		E9BB4CF315C17EF9008D08A0 /* journal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = journal.ttf; sourceTree = "<group>"; };
+		E9BB4CF415C17EF9008D08A0 /* minotaur.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = minotaur.ttf; sourceTree = "<group>"; };
+		E9BB4CF515C17EF9008D08A0 /* Molot.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Molot.otf; sourceTree = "<group>"; };
 		E9BDEA3C15B0C16F00B53F54 /* Bauhaus 93 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Bauhaus 93"; sourceTree = "<group>"; };
 		E9BDEA3D15B0C16F00B53F54 /* CA Traktor.bmap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "CA Traktor.bmap"; sourceTree = "<group>"; };
 		E9BDEA3E15B0C16F00B53F54 /* CA Traktor.suit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "CA Traktor.suit"; sourceTree = "<group>"; };
@@ -191,6 +209,8 @@
 		E90F3B3415BDE8A900B95F61 /* Filter Supporting Pictures */ = {
 			isa = PBXGroup;
 			children = (
+				E9BB4CED15C164EC008D08A0 /* PTA_Gradient.png */,
+				E9BB4CEA15C159C0008D08A0 /* Rainbow_Gradient.png */,
 				E9CA1D7415BF47C100EDD35B /* Texture_4.png */,
 				E9CA1D7015BF3F0800EDD35B /* Texture_3.png */,
 				E9CA1D7115BF3F0800EDD35B /* Rugged_Mask.png */,
@@ -313,16 +333,23 @@
 			isa = PBXGroup;
 			children = (
 				E9BDEA3C15B0C16F00B53F54 /* Bauhaus 93 */,
+				E9BB4CEF15C17EF9008D08A0 /* BebasNeue.otf */,
+				E9BB4CF015C17EF9008D08A0 /* BlackCasper.ttf */,
 				E9BDEA3D15B0C16F00B53F54 /* CA Traktor.bmap */,
 				E9BDEA3E15B0C16F00B53F54 /* CA Traktor.suit */,
 				E9BDEA3F15B0C16F00B53F54 /* comesinhandy.ttf */,
+				E9BB4CF115C17EF9008D08A0 /* GoodDog.otf */,
 				E9BDEA4015B0C16F00B53F54 /* HelveticaCY.dfont */,
 				E9BDEA4115B0C16F00B53F54 /* HelveticaNeue.dfont */,
+				E9BB4CF215C17EF9008D08A0 /* Impact_Label.ttf */,
 				E9BDEA4215B0C16F00B53F54 /* IrvingKO-Bold.ttf */,
 				E9BDEA4315B0C16F00B53F54 /* Jellyka_Estrya_Handwriting.ttf */,
+				E9BB4CF315C17EF9008D08A0 /* journal.ttf */,
 				E9BDEA4415B0C16F00B53F54 /* Menlo.ttc */,
 				E9BDEA4515B0C16F00B53F54 /* Microsoft Sans Serif.ttf */,
+				E9BB4CF415C17EF9008D08A0 /* minotaur.ttf */,
 				E9BDEA4615B0C16F00B53F54 /* Mistral */,
+				E9BB4CF515C17EF9008D08A0 /* Molot.otf */,
 				E9BDEA4715B0C16F00B53F54 /* MyriadPro-Cond.otf */,
 				E9BDEA4815B0C16F00B53F54 /* Perpetua Bold.ttf */,
 			);
@@ -442,6 +469,15 @@
 				E9CA1D7215BF3F0800EDD35B /* Texture_3.png in Resources */,
 				E9CA1D7315BF3F0800EDD35B /* Rugged_Mask.png in Resources */,
 				E9CA1D7515BF47C100EDD35B /* Texture_4.png in Resources */,
+				E9BB4CEB15C159C0008D08A0 /* Rainbow_Gradient.png in Resources */,
+				E9BB4CEE15C164EC008D08A0 /* PTA_Gradient.png in Resources */,
+				E9BB4CF615C17EF9008D08A0 /* BebasNeue.otf in Resources */,
+				E9BB4CF715C17EF9008D08A0 /* BlackCasper.ttf in Resources */,
+				E9BB4CF815C17EF9008D08A0 /* GoodDog.otf in Resources */,
+				E9BB4CF915C17EF9008D08A0 /* Impact_Label.ttf in Resources */,
+				E9BB4CFA15C17EF9008D08A0 /* journal.ttf in Resources */,
+				E9BB4CFB15C17EF9008D08A0 /* minotaur.ttf in Resources */,
+				E9BB4CFC15C17EF9008D08A0 /* Molot.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
