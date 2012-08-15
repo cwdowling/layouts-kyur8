@@ -43,7 +43,7 @@
 /*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
-{
+{ 
 }
 */
 
@@ -51,10 +51,20 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    [super viewDidLoad];    
     
+    NSMutableArray *fontNames = [[NSMutableArray alloc] init];
+    NSArray *fontFamilyNames = [UIFont familyNames];
+    for(NSString *familyName in fontFamilyNames) {
+        NSLog(@"font family name = %@", familyName);
+        NSArray *names = [UIFont fontNamesForFamilyName:familyName];
+        NSLog(@"Font Names = %@",fontNames);
+        [fontNames addObjectsFromArray:names];
+    }
+    [super viewDidLoad];  
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+    self.navigationController.navigationBar.hidden = YES;
     Filters *filter = [[Filters alloc] init];
-    [self.pictureFrame setImage:[filter Scrawl:self.picture Text:@"Testing"]];
+    [self.pictureFrame setImage:[filter Labels:self.picture Text:@"Accidental Chinese Pandas" End:YES]];
 
 }
 

@@ -51,26 +51,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Layouts/Filters.m"
-         timestampString = "365001608.477297"
+         timestampString = "366755022.184301"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "481"
-         endingLineNumber = "481"
-         landmarkName = "-Fluffy:Text:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "Layouts/Filters.m"
-         timestampString = "365001608.477297"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "447"
-         endingLineNumber = "447"
-         landmarkName = "-Fluffy:Text:"
+         startingLineNumber = "586"
+         endingLineNumber = "586"
+         landmarkName = "-Fluffy:Text:End:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
