@@ -27,9 +27,9 @@
 -(UIImage *)PTA:(UIImage *)image Text:(NSString *)title End:(BOOL)lastPicture;//
 -(UIImage *)Purplicious:(UIImage *)image Text:(NSString *)title End:(BOOL)lastPicture;//
 -(UIImage *)Radsurf:(UIImage *)image Text:(NSString *)title End:(BOOL)lastPicture;//
--(UIImage *)Rainbow:(UIImage *)image Text:(NSString *)title End:(BOOL)lastPicture;//
+-(UIImage *)Rainbow:(UIImage *)image Text:(NSString *)title End:(BOOL)lastPicture;//Pass Through not a supported blend mode in ios
 -(UIImage *)Rugged:(UIImage *)image Text:(NSString *)title End:(BOOL)lastPicture;//
--(UIImage *)Scrawl:(UIImage *)image Text:(NSString *)title End:(BOOL)lastPicture;//
+-(UIImage *)Scrawl:(UIImage *)image Text:(NSString *)title End:(BOOL)lastPicture;//text is not visible using colordodge
 -(UIImage *)Str8up:(UIImage *)image Text:(NSString *)title End:(BOOL)lastPicture;//
 -(UIImage *)ThornRose:(UIImage *)image Text:(NSString *)title End:(BOOL)lastPicture;//
 -(UIImage *)WashedOut:(UIImage *)image Text:(NSString *)title End:(BOOL)lastPicture;//

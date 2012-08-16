@@ -872,25 +872,73 @@ take out possible extra gradients
 
 -(UIImage *)LiteRite:(UIImage *)image Text:(NSString *)title End:(BOOL)lastPicture {
     //text
-    NSString *upperTitle = [title uppercaseString];
-    VerticallyAlignedLabel *text = [[VerticallyAlignedLabel alloc] initWithFrame:CGRectMake(0, 0, 240, 480)];
-    text.lineHeight = 30;
-    UIFont *font = [UIFont fontWithName:@"GillSans-Light" size:40];
-    [text setFont:font];
-    [text setText:upperTitle];
-    text.numberOfLines = 0;
-    text.backgroundColor = [UIColor clearColor];
-    text.textAlignment = UITextAlignmentRight;
-    text.verticalAlignment = VerticalAlignmentTop;
-    text.textColor = [UIColor colorWithRed:231.0/255.0 green:194.0/255.0 blue:82.0/255.0 alpha:1.0];
+    UIImage *textImage;
+    UIImage *shadowImage;
     
-    UIGraphicsBeginImageContext(text.frame.size);
-    [[text layer] renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *textImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    if(lastPicture) {
+        VerticallyAlignedLabel *text = [[VerticallyAlignedLabel alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+        UIFont *font = [UIFont fontWithName:@"GillSans-Light" size:50];
+        [text setFont:font];
+        [text setText:@" THE            END"];
+        text.numberOfLines = 2;
+        text.lineHeight = 40;
+        text.backgroundColor = [UIColor clearColor];
+        text.textAlignment = UITextAlignmentCenter;
+        text.verticalAlignment = VerticalAlignmentTop;
+        text.textColor = [UIColor colorWithRed:231.0/255.0 green:194.0/255.0 blue:82.0/255.0 alpha:1.0];
+        
+        UIGraphicsBeginImageContext(image.size);
+        CGContextRotateCTM (UIGraphicsGetCurrentContext(), 0.025);
+        [[text layer] renderInContext:UIGraphicsGetCurrentContext()];
+        textImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        shadowImage = [self textShadow:text];
+        
+        
+    } else {
+        NSMutableArray *stringsArray = [[title componentsSeparatedByString:@" "] mutableCopy];
+        NSMutableArray *wordImages = [[NSMutableArray alloc] init];
+        for(NSString *word in stringsArray) {
+            NSString *upperTitle = [word uppercaseString];
+            VerticallyAlignedLabel *text = [[VerticallyAlignedLabel alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+            UIFont *font = [UIFont fontWithName:@"GillSans-Light" size:40];
+            [text setFont:font];
+            [text setText:upperTitle];
+            text.numberOfLines = 1;
+            text.backgroundColor = [UIColor clearColor];
+            text.textAlignment = UITextAlignmentRight;
+            text.verticalAlignment = VerticalAlignmentTop;
+            text.textColor = [UIColor colorWithRed:231.0/255.0 green:194.0/255.0 blue:82.0/255.0 alpha:1.0];
+            text.adjustsFontSizeToFitWidth = YES;
+            UIGraphicsBeginImageContext(image.size);
+            [[text layer] renderInContext:UIGraphicsGetCurrentContext()];
+            [wordImages addObject:UIGraphicsGetImageFromCurrentImageContext()];
+            UIGraphicsEndImageContext();
+        }
+        UIGraphicsBeginImageContext(image.size);
+        CGContextRotateCTM (UIGraphicsGetCurrentContext(), 0.025);
+        int line = 0;
+        for(UIImage *word in wordImages) {
+            [word drawInRect:CGRectMake(0, 50 + line*30, 320, 480)];
+            ++line;
+        }
+        textImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        UIGraphicsBeginImageContext(image.size);
+        CGContextRotateCTM (UIGraphicsGetCurrentContext(), 0.025);
+        int shadowLine = 0;
+        for(UIImage *word in wordImages) {
+            UIImage *shadowWord = [self textShadow:word];
+            [shadowWord drawInRect:CGRectMake(0, 50 + shadowLine*30, 320, 480)];
+            ++line;
+        }
+        shadowImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
     
-    UIImage *shadowImage = [self textShadow:text];
-
+    //filter
     CGFloat rainbowComponents[8] = { 20.0/255.0, 237.0/255.0, 183.0/255.0, 1.0, 250.0/255.0, 56.0/255.0, 4.0/255.0, 1.0 };
     size_t rainbowNumLocations = 2;
     CGFloat rainbowLocations[2] = {0.0, 1.0 };
@@ -912,8 +960,8 @@ take out possible extra gradients
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
     [rainbowImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeSoftLight alpha:1.0];
-    [textImage drawInRect:CGRectMake(0, 50, image.size.width, image.size.height) blendMode:kCGBlendModeColorDodge alpha:1.0];
-    [shadowImage drawInRect:CGRectMake(0, 50, image.size.width, image.size.height)];
+    [textImage drawInRect:CGRectMake(0, 50 + 160*lastPicture, image.size.width, image.size.height) blendMode:kCGBlendModeColorDodge alpha:1.0];
+    //[shadowImage drawInRect:CGRectMake(0, 50 + 160*lastPicture, image.size.width, image.size.height)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
@@ -923,11 +971,17 @@ take out possible extra gradients
 
 -(UIImage *)Longwash:(UIImage *)image Text:(NSString *)title End:(BOOL)lastPicture {
     //text
-    NSString *upperTitle = [title uppercaseString];
     UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 250)];
-    UIFont *font = [UIFont fontWithName:@"Futura-CondensedMedium" size:300];
-    [text setFont:font];
-    [text setText:upperTitle];
+    if(lastPicture) {
+        [text setText:@"FINIS."];
+        UIFont *font = [UIFont fontWithName:@"Futura-CondensedMedium" size:60];
+        [text setFont:font];
+    } else {
+        UIFont *font = [UIFont fontWithName:@"Futura-CondensedMedium" size:300];
+        NSString *upperTitle = [title uppercaseString];
+        [text setText:upperTitle];
+        [text setFont:font];
+    }
     text.numberOfLines = 1;
     text.adjustsFontSizeToFitWidth = YES;
     text.backgroundColor = [UIColor clearColor];
@@ -980,8 +1034,12 @@ take out possible extra gradients
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
     [rainbowImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeColor alpha:0.5];
-    [mask drawInRect:CGRectMake(0, 50, 320, 480)];
-    [textImage drawInRect:CGRectMake(0, -115, 320, 480) blendMode:kCGBlendModeDarken alpha:1.0];
+    if(!lastPicture) {
+        [mask drawInRect:CGRectMake(0, 50, 320, 480)];
+        [textImage drawInRect:CGRectMake(0, -115, 320, 480) blendMode:kCGBlendModeDarken alpha:1.0];
+    } else {
+        [textImage drawInRect:CGRectMake(0, 120, 320, 480) blendMode:kCGBlendModeNormal alpha:1.0];
+    }
     [texture drawInRect:CGRectMake(0, 0, 320, 480) blendMode:kCGBlendModeScreen alpha:1.0];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -993,13 +1051,18 @@ take out possible extra gradients
     //text
     NSString *upperTitle = [title uppercaseString];
     VerticallyAlignedLabel *text = [[VerticallyAlignedLabel alloc] initWithFrame:CGRectMake(0, 0, 320, 240)];
-    UIFont *font = [UIFont fontWithName:@"MyriadPro-Cond" size:120];
+    UIFont *font = [UIFont fontWithName:@"MyriadPro-Cond" size:100];
     [text setFont:font];
-    [text setText:upperTitle];
+    if(lastPicture) {
+        [text setText:@"THE END"];
+        text.textAlignment = UITextAlignmentCenter;
+    } else {
+        [text setText:upperTitle]; 
+        text.textAlignment = UITextAlignmentLeft;
+    }
     text.numberOfLines = 0;
     text.lineHeight = 90;
     text.backgroundColor = [UIColor clearColor];
-    text.textAlignment = UITextAlignmentLeft;
     
     CGFloat textComponents[20] = {
         246.0/255.0,241.0/255.0,178.0/255.0,0.3, 
@@ -1043,7 +1106,7 @@ take out possible extra gradients
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
     [gradient drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeLighten alpha:1.0];
-    [textImage drawInRect:CGRectMake(0, 50, 320, 480)];
+    [textImage drawInRect:CGRectMake(0, 50 + 160*lastPicture, 320, 480)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
@@ -1056,7 +1119,11 @@ take out possible extra gradients
     VerticallyAlignedLabel *text = [[VerticallyAlignedLabel alloc] initWithFrame:CGRectMake(0, 0, 320, 240)];
     UIFont *font = [UIFont fontWithName:@"Journal" size:100];
     [text setFont:font];
-    [text setText:upperTitle];
+    if(lastPicture) {
+        [text setText:@"the end."];
+    } else {
+        [text setText:upperTitle];
+    }
     text.numberOfLines = 0;
     text.lineHeight = 60;
     text.backgroundColor = [UIColor clearColor];
@@ -1116,8 +1183,8 @@ take out possible extra gradients
     [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
     [rainbowImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeHardLight alpha:1.0];
     [texture drawInRect:CGRectMake(0, 0, 320, 480) blendMode:kCGBlendModeSoftLight alpha:1.0];
-    [textImage2 drawInRect:CGRectMake(0, 50, 320, 480)];
-    [textImage1 drawInRect:CGRectMake(0, 50, 320, 480)];
+    [textImage2 drawInRect:CGRectMake(0, 50 + 140*lastPicture, 320, 480)];
+    [textImage1 drawInRect:CGRectMake(0, 50 + 140*lastPicture, 320, 480)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
@@ -1127,14 +1194,23 @@ take out possible extra gradients
 -(UIImage *)Rainbow:(UIImage *)image Text:(NSString *)title End:(BOOL)lastPicture {
     //text
     NSString *upperTitle = [title uppercaseString];
-    VerticallyAlignedLabel *text = [[VerticallyAlignedLabel alloc] initWithFrame:CGRectMake(0, 0, 240, 480)];
-    UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:50];
-    [text setFont:font];
-    [text setText:upperTitle];
+    VerticallyAlignedLabel *text = [[VerticallyAlignedLabel alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    if(lastPicture) {
+        [text setText:@"THE             END"];
+        text.textAlignment = UITextAlignmentCenter;
+        UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:70];
+        [text setFont:font];
+        text.lineHeight = 52;
+
+    } else {
+        [text setText:upperTitle];
+        text.textAlignment = UITextAlignmentLeft;
+        UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:50];
+        [text setFont:font];
+        text.lineHeight = 40;
+    }
     text.numberOfLines = 0;
-    text.lineHeight = 40;
     text.backgroundColor = [UIColor clearColor];
-    text.textAlignment = UITextAlignmentLeft;
     text.verticalAlignment = VerticalAlignmentTop;
     
     text.textColor = [UIColor blackColor];
@@ -1156,7 +1232,7 @@ take out possible extra gradients
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
     [gradient drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeLighten alpha:1.0];
-    [textImage drawInRect:CGRectMake(0, 50, 320, 480) blendMode:kCGBlendModeNormal alpha:0.70];
+    [textImage drawInRect:CGRectMake(0, 50 + 140*lastPicture, 320, 480) blendMode:kCGBlendModeNormal alpha:0.70];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
@@ -1166,9 +1242,15 @@ take out possible extra gradients
 -(UIImage *)Rugged:(UIImage *)image Text:(NSString *)title End:(BOOL)lastPicture {
     //text
     UILabel *text = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 250)];
-    UIFont *font = [UIFont fontWithName:@"Baskerville-Bold" size:300];
-    [text setFont:font];
-    [text setText:title];
+    if(lastPicture) {
+        UIFont *font = [UIFont fontWithName:@"Baskerville-Bold" size:50];
+        [text setFont:font];
+        [text setText:@"the end"];
+    } else {
+        UIFont *font = [UIFont fontWithName:@"Baskerville-Bold" size:300];
+        [text setFont:font];
+        [text setText:title];
+    }
     text.numberOfLines = 1;
     text.adjustsFontSizeToFitWidth = YES;
     text.backgroundColor = [UIColor clearColor];
@@ -1210,10 +1292,14 @@ take out possible extra gradients
     //Assemble
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
-    [mask drawInRect:CGRectMake(0, 50, 320, 480)];
+    if(!lastPicture){[mask drawInRect:CGRectMake(0, 50, 320, 480)];}
     [texture drawInRect:CGRectMake(0, 0, 320, 480) blendMode:kCGBlendModeSoftLight alpha:1.0];
     [rainbowImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeSoftLight alpha:1.0];
-    [textImage drawInRect:CGRectMake(0, -115, 320, 480) blendMode:kCGBlendModeColorBurn alpha:1.0];
+    if(lastPicture){
+        [textImage drawInRect:CGRectMake(0, 120, 320, 480) blendMode:kCGBlendModeNormal alpha:1.0];
+    } else {
+        [textImage drawInRect:CGRectMake(0, -115, 320, 480) blendMode:kCGBlendModeColorBurn alpha:1.0];
+    }    
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
@@ -1221,7 +1307,12 @@ take out possible extra gradients
 }
 
 -(UIImage *)Scrawl:(UIImage *)image Text:(NSString *)title End:(BOOL)lastPicture {
-    UILabel *text = [self ScrawlText:title];
+    UILabel *text;
+    if(lastPicture) {
+        text = [self ScrawlText:@"finis."];
+    } else {
+        text = [self ScrawlText:title];
+    }
     
     UIGraphicsBeginImageContext(image.size);
     [[text layer] renderInContext:UIGraphicsGetCurrentContext()];
@@ -1254,10 +1345,9 @@ take out possible extra gradients
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
     [gradientImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeOverlay alpha:1.0];
-    [textImage drawInRect:CGRectMake(0, 50, 320, 480) blendMode:kCGBlendModeHardLight alpha:1.0];
-    [textImage drawInRect:CGRectMake(0, 50, 320, 480) blendMode:kCGBlendModeNormal alpha:1.0];
-
-    //[shadowImage drawInRect:CGRectMake(0, 50, 320, 480) blendMode:kCGBlendModeNormal alpha:1.0];
+    [textImage drawInRect:CGRectMake(0, 50 + 160*lastPicture, 320, 480) blendMode:kCGBlendModeHardLight alpha:1.0];
+    [textImage drawInRect:CGRectMake(0, 50 + 160*lastPicture, 320, 480) blendMode:kCGBlendModeNormal alpha:1.0];
+    //[shadowImage drawInRect:CGRectMake(0, 50 + 160*lastPicture, 320, 480) blendMode:kCGBlendModeNormal alpha:1.0];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
@@ -1341,7 +1431,13 @@ take out possible extra gradients
 
 -(UIImage *)Str8up:(UIImage *)image Text:(NSString *)title End:(BOOL)lastPicture {
     //text
-    UILabel *text = [self Str8upText:title];
+    UILabel *text;
+    if(lastPicture) {
+        text = [self Str8upText:@"THE           END"];
+
+    } else {
+        text = [self Str8upText:title];
+    }
     UIGraphicsBeginImageContext(image.size);
     [[text layer] renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *textImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -1350,7 +1446,7 @@ take out possible extra gradients
     //Assemble
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
-    [textImage drawInRect:CGRectMake(0, 50, 320, 480)];
+    [textImage drawInRect:CGRectMake(0, 50 + 120*lastPicture, 320, 480)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
@@ -1368,7 +1464,7 @@ take out possible extra gradients
     text.textAlignment = UITextAlignmentCenter;
     text.textColor = [UIColor whiteColor];
     text.numberOfLines = 0;
-    text.lineHeight = 80;
+    text.lineHeight = 60;
     
     //Drop Shadow
     [[text layer] setShadowOffset:CGSizeMake(-1,1)];
@@ -1386,9 +1482,14 @@ take out possible extra gradients
     VerticallyAlignedLabel *text = [[VerticallyAlignedLabel alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     text.verticalAlignment = VerticalAlignmentTop;
     [text setFont:font];
-    [text setText:upperTitle];
+    if(lastPicture) {
+        text.textAlignment = UITextAlignmentCenter;
+        [text setText:@"FINIS"];
+    } else {
+        text.textAlignment = UITextAlignmentLeft;
+        [text setText:upperTitle];   
+    }
     text.backgroundColor = [UIColor clearColor];
-    text.textAlignment = UITextAlignmentLeft;
     text.textColor = [UIColor colorWithRed:199.0/255.0 green:32.0/255.0 blue:193.0/255.0 alpha:1.0];
     text.numberOfLines = 0;
     text.lineHeight = 60;
@@ -1422,8 +1523,8 @@ take out possible extra gradients
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
     [rainbowImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeLighten alpha:1.0];
-    [textImage drawInRect:CGRectMake(0, 50, 320, 480) blendMode:kCGBlendModeColorDodge alpha:1.0];
-    //[shadowImage drawInRect:CGRectMake(0, 50, 320, 480)];
+    [textImage drawInRect:CGRectMake(0, 50 + 160*lastPicture, 320, 480) blendMode:kCGBlendModeColorDodge alpha:1.0];
+    //[shadowImage drawInRect:CGRectMake(0, 50 + 160*lastPicture, 320, 480)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
@@ -1438,9 +1539,14 @@ take out possible extra gradients
     VerticallyAlignedLabel *text = [[VerticallyAlignedLabel alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     text.verticalAlignment = VerticalAlignmentTop;
     [text setFont:font];
-    [text setText:upperTitle];
+    if(lastPicture) {
+        [text setText:@"THE             END"];
+        text.textAlignment = UITextAlignmentCenter;
+    } else {
+        [text setText:upperTitle];
+        text.textAlignment = UITextAlignmentLeft;
+    }
     text.backgroundColor = [UIColor clearColor];
-    text.textAlignment = UITextAlignmentLeft;
     text.numberOfLines = 0;
     text.lineHeight = 60;
     
@@ -1492,7 +1598,7 @@ take out possible extra gradients
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
     [rainbowImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeColor alpha:0.5];
-    [textImage drawInRect:CGRectMake(0, 50, 320, 480) blendMode:kCGBlendModeNormal alpha:1.0];
+    [textImage drawInRect:CGRectMake(0, 50 + 120*lastPicture, 320, 480) blendMode:kCGBlendModeNormal alpha:1.0];
     [texture drawInRect:CGRectMake(0, 0, 320, 480) blendMode:kCGBlendModeScreen alpha:1.0];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -1502,10 +1608,14 @@ take out possible extra gradients
 
 -(UIImage *)YelloMello:(UIImage *)image Text:(NSString *)title End:(BOOL)lastPicture {
     //Text
-    UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:80];
+    UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:60];
     VerticallyAlignedLabel *text = [[VerticallyAlignedLabel alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     [text setFont:font];
-    [text setText:title];
+    if(lastPicture) {
+        [text setText:@"THE END"];
+    } else {
+        [text setText:title];
+    }
     text.numberOfLines = 0;
     text.lineHeight = 60; 
     text.backgroundColor = [UIColor clearColor];
@@ -1544,7 +1654,7 @@ take out possible extra gradients
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
     [rainbowImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeOverlay alpha:1.0];
-    [textImage drawInRect:CGRectMake(0, 50, 320, 480) blendMode:kCGBlendModeLighten alpha:1.0];
+    [textImage drawInRect:CGRectMake(0, 50 + 160*lastPicture, 320, 480) blendMode:kCGBlendModeLighten alpha:1.0];
     //[shadowImage drawInRect:CGRectMake(0, 0, 320, 150)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();

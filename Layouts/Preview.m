@@ -64,7 +64,7 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     self.navigationController.navigationBar.hidden = YES;
     Filters *filter = [[Filters alloc] init];
-    [self.pictureFrame setImage:[filter Labels:self.picture Text:@"Accidental Chinese Pandas" End:YES]];
+    [self.pictureFrame setImage:[filter YelloMello:self.picture Text:@"Accidental Chinese Pandas" End:YES]];
 
 }
 
