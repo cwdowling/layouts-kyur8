@@ -8,18 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum VerticalAlignment {
-    VerticalAlignmentTop,
-    VerticalAlignmentMiddle,
-    VerticalAlignmentBottom,
-} VerticalAlignment;
+typedef enum VerticalAlignmentAdjustable {
+    VerticalAlignmentTopAdjustable,
+    VerticalAlignmentMiddleAdjustable,
+    VerticalAlignmentBottomAdjustable,
+} VerticalAlignmentAdjustable;
 
 @interface AdjustableUILabel : UILabel {
-    @private VerticalAlignment verticalAlignment_;
+    @private VerticalAlignmentAdjustable verticalAlignment_;
     CGFloat characterSpacing;
 }
 
 @property CGFloat characterSpacing;
-@property (nonatomic, assign) VerticalAlignment verticalAlignment;
+@property (nonatomic, assign) VerticalAlignmentAdjustable verticalAlignment;
 
 @end

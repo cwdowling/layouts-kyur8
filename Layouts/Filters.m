@@ -9,8 +9,9 @@
 #import "Filters.h"
 #import <QuartzCore/QuartzCore.h>
 #import <CoreFoundation/CoreFoundation.h>
+#import <CoreText/CoreText.h>
 #import "VerticallyAlignedLabel.h"
-#import "VerticallyAlignedLabel.h"
+#import "AdjustableUILabel.h"
 
 @interface Filters ()
 -(UIImage *)endPhoto:(UIImage *)image;
@@ -18,7 +19,7 @@
 
 -(UILabel *)BaconText:(NSString *)title End:(BOOL)lastPicture;
 -(UILabel *)BitchinText:(NSString *)title End:(BOOL)lastPicture;
--(UILabel *)BuhlooText:(NSString *)title End:(BOOL)lastPicture;
+-(UIImage *)BuhlooText:(NSString *)title End:(BOOL)lastPicture;
 -(UILabel *)CleanText:(NSString *)title End:(BOOL)lastPicture;
 -(UILabel *)CutUpText:(NSString *)title End:(BOOL)lastPicture;
 -(UILabel *)DownerText:(NSString *)title End:(BOOL)lastPicture;
@@ -32,19 +33,18 @@
 -(UILabel *)Str8upText:(NSString *)title;
 
 -(UIImage *)changeWhiteColorTransparent:(UIImage *)image;
+-(NSArray *)textDivider:(NSString *)text;
+-(CGFloat)getFontSize:(NSString *)text forWidth:(NSInteger)width withMax:(CGFloat)maxSize Font:(UIFont *)font;
 @end
 
 @implementation Filters
 
 @synthesize YBTextGradient = _YBTextGradient;
-/* Text Completed
- DropLeft
- DropRight
-
+/* Color Dodges Changed to Normal
+ Bitchin
 
 /*  QUESTIONS
 Same gradient overlays on pictures
-Longwash mask. original picture not visible at all
 Banding from 3+ color gradients
 PinSoftLight Blend Mode not supported
 ThornRose not right because of fill on rainbow filter in original psd file
@@ -54,8 +54,10 @@ Rainbow requires angle gradient - fixed by adding image in library
     TO DO
 fix the old CAGradientLayers
 add textures with pinlight somehow
-take out possible extra gradients
 */
+
+int WIDTH = 320;
+int HEIGHT = 480;
 
 -(CGRect)textRect {
     return CGRectMake(0, 0, 320, 480);
@@ -65,6 +67,12 @@ take out possible extra gradients
     //GPUImageGaussianBlurFilter *filter = [[GPUImageGaussianBlurFilter alloc] init];
     //return [filter imageByFilteringImage:image];
 }
+
+-(UIView *)textView:(UIImage *)text {
+    UIImageView *view = [[UIImageView alloc] initWithImage:text];
+    return view;
+}
+
 
 
 
@@ -98,7 +106,7 @@ take out possible extra gradients
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
     [rainbowImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeSoftLight alpha:0.64];
-    [texture drawInRect:CGRectMake(0, 0, image.size.width, image.size.width) blendMode:kCGBlendModeHardLight alpha:0.4];
+    [texture drawInRect:CGRectMake(0, 0, image.size.width, image.size.width) blendMode:kCGBlendModeHardLight alpha:1.0];
     [textImage drawInRect:CGRectMake(0, 50 + 180*(lastPicture), 320, 480)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -144,8 +152,15 @@ take out possible extra gradients
     UIImage *textImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();   
     
-    //shadow
+    /*shadow
+     changed from color dodge to normal
     UIImage *shadowImage = [self textShadow:text];
+    UIGraphicsBeginImageContext(shadowImage.size);
+    CGContextRotateCTM (UIGraphicsGetCurrentContext(), 0.025);
+    [shadowImage drawInRect:CGRectMake(0, 0, 320, 480)];
+    shadowImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+     */
         
     //rainbow filter
     CGFloat rainbowComponents[20] = {250.0/255.0, 229.0/255.0, 177.0/255.0, 1.0, 244.0/255.0, 190.0/255.0, 178.0/255.0, 1.0, 238.0/255.0, 149.0/255.0, 172.0/255.0, 1.0, 182.0/255.0, 125.0/255.0, 173.0/255.0, 1.0, 132.0/255.0, 106.0/255.0, 175.0/255.0, 1.0 };
@@ -167,8 +182,8 @@ take out possible extra gradients
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
     [rainbowImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeSoftLight alpha:1.0];
-    [textImage drawInRect:CGRectMake(0, 50 + 180*(lastPicture), 320, 480) blendMode:kCGBlendModeColorDodge alpha:1.0];
-    [shadowImage drawInRect:CGRectMake(0, 50 + 180*(lastPicture), 320, 480)];
+    //[shadowImage drawInRect:CGRectMake(0, 50 + 160*(lastPicture), 320, 480)];
+    [textImage drawInRect:CGRectMake(0, 50 + 160*(lastPicture), 320, 480) blendMode:kCGBlendModeNormal alpha:1.0];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
@@ -192,22 +207,24 @@ take out possible extra gradients
     text.verticalAlignment = VerticalAlignmentTop;
     text.textColor = [UIColor colorWithRed:213.0/255.0 green:153.0/255.0 blue:125.0/255.0 alpha:1.0];
     
+    //Drop Shadow
+    [[text layer] setShadowOffset:CGSizeMake(-1,1)];
+    [[text layer] setShadowColor:[[UIColor darkGrayColor] CGColor]];
+    [[text layer] setShadowRadius:5.0];
+    [[text layer] setShadowOpacity:1.0];
+    
     return text;
 }
 
 -(UIImage *)Buhloo:(UIImage *)image Text:(NSString *)title End:(BOOL)lastPicture {
-    //text
-    UILabel *text = [self BuhlooText:title End:lastPicture];
-    UIGraphicsBeginImageContext(text.frame.size);
-    [[text layer] renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *textImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();   
-    
+    UIImage *textImage = [self BuhlooText:title End:lastPicture];
+    /* shadow
+     changed from lighten to normal
     UIImage *shadowImage = [self textShadow:text];
-    
+    */
+
     //texture
     UIImage *texture = [UIImage imageNamed:@"Texture_1"];
-    
     //rainbow filter
     CGFloat rainbowComponents[12] = {244.0/255.0, 238.0/255.0, 235.0/255.0, 1.0, 24.0/255.0, 48.0/255.0, 153.0/255.0, 1.0, 
         10.0/255.0, 16.0/255.0, 41.0/255.0, 1.0};
@@ -229,32 +246,92 @@ take out possible extra gradients
     UIGraphicsBeginImageContext(image.size);
     [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
     [rainbowImage drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeSoftLight alpha:1.0];
-    [texture drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeLighten alpha:0.4];
-    [textImage drawInRect:CGRectMake(0, 50 + 180*(lastPicture), 320, 480) blendMode:kCGBlendModeLighten alpha:1.0];
+    [texture drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeLighten alpha:1.0];
+    [texture drawInRect:CGRectMake(0, 0, image.size.width, image.size.height) blendMode:kCGBlendModeDarken alpha:1.0];
+    [textImage drawInRect:CGRectMake(0, -80 + 180*(lastPicture), textImage.size.width, textImage.size.height) blendMode:kCGBlendModeColorDodge alpha:0.8];
+    [textImage drawInRect:CGRectMake(0, -80 + 180*(lastPicture), textImage.size.width, textImage.size.height) blendMode:kCGBlendModeNormal alpha:0.5];
     //[shadowImage drawInRect:CGRectMake(0, 50 + 180*(lastPicture), 320, 480)];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
     return newImage;
 }
--(UILabel *)BuhlooText:(NSString *)title End:(BOOL)lastPicture {
-    NSString *upperTitle = [title uppercaseString];
-    UIFont *font = [UIFont fontWithName:@"Minotaur" size:80];
-    VerticallyAlignedLabel *text = [[VerticallyAlignedLabel alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-    if(lastPicture) {
-        [text setText:@"THE END"];
-        text.textAlignment = UITextAlignmentCenter;
+-(UIImage *)BuhlooText:(NSString *)title End:(BOOL)lastPicture {
+    if(!lastPicture) {
+        NSArray *lines = [self textDivider:title];
+        CGFloat lastFont = -1;
+        CGFloat height = 0;
+        
+        UIGraphicsBeginImageContext(CGSizeMake(WIDTH, HEIGHT));
+        CGContextRef final = UIGraphicsGetCurrentContext();
+        CGContextRotateCTM (UIGraphicsGetCurrentContext(), -0.0262);
+        
+        for(int i=0; i<[lines count]; ++i) {
+            //context for each label
+            UIGraphicsBeginImageContext(CGSizeMake(WIDTH, HEIGHT));
+            CGContextRef instance = UIGraphicsGetCurrentContext();
+            
+            NSString *line = [lines objectAtIndex:i];
+            NSString *upperTitle = [line uppercaseString];
+            UIFont *font = [UIFont fontWithName:@"Minotaur" size:200];
+            AdjustableUILabel *text = [[AdjustableUILabel alloc] initWithFrame:CGRectMake(0, height, WIDTH, HEIGHT)];
+            [text setText:upperTitle];
+            text.textAlignment = UITextAlignmentLeft;
+            text.verticalAlignment = VerticalAlignmentTopAdjustable;
+            [text setFont:font];
+            text.numberOfLines = 1;
+            text.adjustsFontSizeToFitWidth = YES;
+            text.backgroundColor = [UIColor clearColor];
+            text.textColor = [UIColor colorWithRed:125.0/255.0 green:219.0/255.0 blue:219.0/255.0 alpha:1.0];
+            
+            //Drop Shadow
+            [[text layer] setShadowOffset:CGSizeMake(-1,1)];
+            [[text layer] setShadowColor:[[UIColor darkGrayColor] CGColor]];
+            [[text layer] setShadowRadius:5.0];
+            [[text layer] setShadowOpacity:1.0];
+                        
+            CGFloat plusHeight;
+            if ([line length] < 5) {
+                if(lastFont == -1) {
+                    if(i != [lines count]-1 && [[lines objectAtIndex:i+1] count] >= 5) {
+                        CGFloat size = [self getFontSize:[lines objectAtIndex:i+1] forWidth:WIDTH withMax:200 Font:font];
+                        lastFont = size;
+                        [text setFont:[UIFont fontWithName:@"Minotaur" size:lastFont]];
+                        plusHeight = lastFont*0.63;
+                    } else {
+                        CGFloat size = [self getFontSize:[lines objectAtIndex:i+1] forWidth:WIDTH withMax:200 Font:font];
+                        plusHeight = size*0.63;
+                    }
+                } else {
+                    [text setFont:[UIFont fontWithName:@"Minotaur" size:lastFont]];
+                    plusHeight = lastFont*0.63;
+                }
+            } else {
+                CGFloat size = [self getFontSize:upperTitle forWidth:WIDTH withMax:200 Font:font];
+                lastFont = size;
+                plusHeight = lastFont*0.63;
+            }
+            
+            [[text layer] renderInContext:instance];
+            UIImage *label = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            
+            height += plusHeight;
+            [label drawInRect:CGRectMake(0, height, WIDTH, HEIGHT)];
+
+        }
+        UIImage *big = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        UIGraphicsBeginImageContext(CGSizeMake(WIDTH,height +200.0));
+        [big drawInRect:CGRectMake(0, 0, 320, 480)];
+        return UIGraphicsGetImageFromCurrentImageContext();
     } else {
-        [text setText:upperTitle];
-        text.textAlignment = UITextAlignmentLeft;
+      //[text setText:@"THE END"];          
     }
-    text.lineHeight = 60;
-    [text setFont:font];
-    text.numberOfLines = 0;
-    text.backgroundColor = [UIColor clearColor];
-    text.textColor = [UIColor colorWithRed:125.0/255.0 green:219.0/255.0 blue:219.0/255.0 alpha:1.0];
     
-    return text;
+    //return text;
+    //text.textAlignment = UITextAlignmentCenter;
+
 }
 
 -(UIImage *)Clean:(UIImage *)image Text:(NSString *)title End:(BOOL)lastPicture {
@@ -1676,6 +1753,7 @@ take out possible extra gradients
     [[text layer] renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *shadowImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    return shadowImage;
     
     UIImage *final = [self changeWhiteColorTransparent:shadowImage];
     return final;
@@ -1732,6 +1810,42 @@ take out possible extra gradients
     CGContextRelease(final); 
     free(picData);
     return rawImage;
+}
+
+-(NSArray *)textDivider:(NSString *)text {
+    NSArray *words = [text componentsSeparatedByString:@" "];
+    NSLog(@"%d",[words count]);
+    NSMutableArray *lines = [[NSMutableArray alloc] init];
+    int index = 0;
+    while (index < [words count]) {
+        NSString *next = [words objectAtIndex:index];
+        if([next length] < 5) {
+            NSString *second = [words objectAtIndex:index + 1];
+            if([second length] < 5) {
+                NSString *final = [next stringByAppendingString:[@" " stringByAppendingString:[words objectAtIndex:index+1]]];
+                [lines addObject:final];
+                index += 2;
+            } else {
+                [lines addObject:next];
+                index += 1;
+            }
+        } else {
+            [lines addObject:next];
+            index += 1;
+        }
+    }
+    NSLog(@"number of lines: %d",[lines count]);
+    return lines;
+}
+
+-(CGFloat)getFontSize:(NSString *)text forWidth:(NSInteger)width withMax:(CGFloat)maxSize Font:(UIFont *)font {    
+    CGFloat actualFontSize = maxSize;
+    CGSize  size = [text sizeWithFont:font minFontSize:1 actualFontSize:&actualFontSize forWidth:width lineBreakMode:UILineBreakModeTailTruncation];
+    while (size.width > width) {
+        CGSize  size = [text sizeWithFont:font minFontSize:10 actualFontSize:&actualFontSize forWidth:width lineBreakMode:UILineBreakModeTailTruncation];
+        --actualFontSize;
+    }
+    return actualFontSize;
 }
 
 @end

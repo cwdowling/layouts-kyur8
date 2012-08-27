@@ -59,6 +59,7 @@
 		E9A9A3CB1592253A00C11DA8 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = E9A9A3CA1592253A00C11DA8 /* test.png */; };
 		E9A9A3D51592668600C11DA8 /* Preview.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A9A3D41592668600C11DA8 /* Preview.m */; };
 		E9ACE7BD15B5F6E20057C5D2 /* panda.png in Resources */ = {isa = PBXBuildFile; fileRef = E9ACE7BC15B5F6E20057C5D2 /* panda.png */; };
+		E9B1982115E808A000601881 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B1982015E808A000601881 /* CoreText.framework */; };
 		E9BB4CEB15C159C0008D08A0 /* Rainbow_Gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = E9BB4CEA15C159C0008D08A0 /* Rainbow_Gradient.png */; };
 		E9BB4CEE15C164EC008D08A0 /* PTA_Gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = E9BB4CED15C164EC008D08A0 /* PTA_Gradient.png */; };
 		E9BB4D1615C1E1EB008D08A0 /* VerticallyAlignedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BB4D1515C1E1EA008D08A0 /* VerticallyAlignedLabel.m */; };
@@ -157,6 +158,7 @@
 		E9A9A3D31592668600C11DA8 /* Preview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Preview.h; sourceTree = "<group>"; };
 		E9A9A3D41592668600C11DA8 /* Preview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Preview.m; sourceTree = "<group>"; };
 		E9ACE7BC15B5F6E20057C5D2 /* panda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = panda.png; sourceTree = "<group>"; };
+		E9B1982015E808A000601881 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		E9BB4CEA15C159C0008D08A0 /* Rainbow_Gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rainbow_Gradient.png; sourceTree = "<group>"; };
 		E9BB4CED15C164EC008D08A0 /* PTA_Gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PTA_Gradient.png; sourceTree = "<group>"; };
 		E9BB4D1415C1E1E9008D08A0 /* VerticallyAlignedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerticallyAlignedLabel.h; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				E997C7C61598CBB100E55F2B /* QuartzCore.framework in Frameworks */,
 				E9D305FC15ACC1EE002033A6 /* CoreImage.framework in Frameworks */,
 				E9ECA36A15AE0BF400BD0805 /* AssetsLibrary.framework in Frameworks */,
+				E9B1982115E808A000601881 /* CoreText.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +282,7 @@
 		E9A9A3851592218800C11DA8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E9B1982015E808A000601881 /* CoreText.framework */,
 				E9ECA36915AE0BF400BD0805 /* AssetsLibrary.framework */,
 				E9D305FB15ACC1EE002033A6 /* CoreImage.framework */,
 				E997C7C51598CBB100E55F2B /* QuartzCore.framework */,
