@@ -64,8 +64,21 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     self.navigationController.navigationBar.hidden = YES;
     Filters *filter = [[Filters alloc] init];
-    [self.pictureFrame setImage:[filter Buhloo:self.picture Text:@"Chinese Pandas Are On My Mind" End:NO]];
-
+    
+    Filter chosen = Rugged;
+    UIImage *filteredImage = [filter getImage:self.picture withFilter:chosen];
+    TextImageView *text = [filter getText:@"Dave Coulier and accidental chinese pandas are on my mind" forFilter:chosen End:NO];
+    TextImageView *end = [filter getText:@"" forFilter:chosen End:YES];
+    TextImageView *top = [filter getTopViews:chosen];
+    UIGraphicsBeginImageContext(self.picture.size);
+    [filteredImage drawInRect:CGRectMake(0, 0, 320, 480)];
+    [text drawRect:text.frame];
+    [end drawRect:end.frame];
+    if(top) {
+        [top drawRect:top.frame];
+    }
+    [self.pictureFrame setImage:UIGraphicsGetImageFromCurrentImageContext()];
+    UIGraphicsEndImageContext();
 }
 
 - (void)viewDidUnload
